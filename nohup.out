@@ -1,0 +1,24 @@
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.102:5001 (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 154-118-740
+Traceback (most recent call last):
+  File "/Users/johnny/Desktop/repo/udacity/projects/webscraper-cluster/src/scrape-api/app/app.py", line 133, in <module>
+    app.run(debug=True, host='0.0.0.0', port=APP_PORT)
+  File "/Users/johnny/Desktop/repo/udacity/projects/webscraper-cluster/venv-unit/lib/python3.8/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/Users/johnny/Desktop/repo/udacity/projects/webscraper-cluster/venv-unit/lib/python3.8/site-packages/werkzeug/serving.py", line 1083, in run_simple
+    run_with_reloader(
+  File "/Users/johnny/Desktop/repo/udacity/projects/webscraper-cluster/venv-unit/lib/python3.8/site-packages/werkzeug/_reloader.py", line 434, in run_with_reloader
+    ensure_echo_on()
+  File "/Users/johnny/Desktop/repo/udacity/projects/webscraper-cluster/venv-unit/lib/python3.8/site-packages/werkzeug/_reloader.py", line 414, in ensure_echo_on
+    termios.tcsetattr(sys.stdin, termios.TCSANOW, attributes)
+termios.error: (4, 'Interrupted system call')

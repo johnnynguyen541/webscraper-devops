@@ -6,6 +6,9 @@ commands:
     description: "Install pip3 onto image"
     steps:
       - run:
+          name: Test out Docker
+          command: docker --version
+      - run:
           name: Get Python3 Version
           command: python3 --version
       - run:

@@ -8,7 +8,6 @@ The `scrape-api` scrapes data from Website and returns either 404 or 200.
 
 `scrape-api` endpoints:
 - `/` and `all/`       - GET returns all endpoitns
-- `/ci`                - GET returns [Top 10 CI Tools](https://www.datanyze.com/market-share/ci--319)
 - `/config-management` - GET returns [Top 10 Configuration Management Tools](https://www.datanyze.com/market-share/configuration-management--313)
 - `/containers`        - GET returns [Top 10 Containerization](https://www.datanyze.com/market-share/containerization--321)
 - `/health`            - GET returns OK
@@ -16,46 +15,46 @@ The `scrape-api` scrapes data from Website and returns either 404 or 200.
 ```json
 /* "/", and "all/" endpoints */
 {
-    "ci" : {
-        "name" : "ci",                                             // Name of endpoint
-        "url"  : "https://www.datanyze.com/market-share/ci--319",  // URL
-        "date" : "2022:05:17__22:31:16",                           // UTC Date: date -u +"%Y:%m:%d__%H:%M:%S"
-        "data" : {                                                 // Category data
+    "config-management" : {
+        "name": "config-management",
+        "url": "https://...",
+        "date": "2022:05:18__18:47:50",
+        "data": {
             "1": {
-                "Name"            : "Jenkins",
-                "Companies Using" : 14919,
-                "Market Share"    : 63.55
+                "Name": "Ansible",
+                "Company": "Red Hat",
+                "Description": "...",
+                "Number of Companies Using": 9542,
+                "% Market Share": 25.35
             },
             "2": {
-                "Name"            : "JetBrains Team City",
-                "Companies Using" : 1983,
-                "Market Share"    : 8.45
+                ...
             },
-            ....
+            ...
         }
     },
-    "config-management" : {
+    "containers" : {
         ...
     }
 }
 
-/* "ci/" endpoint */
+/* "config-management/" endpoint */
 {
-    "name" : "ci",                                             // Name of endpoint
-    "url"  : "https://www.datanyze.com/market-share/ci--319",  // URL
-    "date" : "2022:05:17__22:31:16",                           // UTC Date: date -u +"%Y:%m:%d__%H:%M:%S"
-    "data" : {                                                 // Category data
+    "name": "config-management",
+    "url": "https://...",
+    "date": "2022:05:18__18:47:50",
+    "data": {
         "1": {
-            "Name"            : "Jenkins",
-            "Companies Using" : 14919,
-            "Market Share"    : 63.55
+            "Name": "Ansible",
+            "Company": "Red Hat",
+            "Description": "...",
+            "Number of Companies Using": 9542,
+            "% Market Share": 25.35
         },
         "2": {
-            "Name"            : "JetBrains Team City",
-            "Companies Using" : 1983,
-            "Market Share"    : 8.45
+            ...
         },
-        ....
+        ...
     }
 }
 

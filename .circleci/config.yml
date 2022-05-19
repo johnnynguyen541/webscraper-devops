@@ -67,11 +67,10 @@ jobs:
           name: Python Unit Tests
           command: |
             sleep 15
-            ssh remote-docker
-            curl 127.0.0.1:5001/
-            curl 127.0.0.1:5001/config-management
-            curl 127.0.0.1:5001/containers
-            curl 127.0.0.1:5001/health
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/health
 
 workflows:
   blue-green-pipeline:

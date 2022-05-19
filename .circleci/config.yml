@@ -46,6 +46,7 @@ jobs:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
+      - setup_remote_docker
       - ubuntu-install-pip3
       - run:
           name: Install all Python Application Libraries

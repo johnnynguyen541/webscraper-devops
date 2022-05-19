@@ -12,7 +12,7 @@ class TestCaseSmokeTest(unittest.TestCase):
 
     def test_1_check_main_get_request(self):
         print(f"\nSmoke Test 1 [/health]: Check Endpoint")
-        self.r = requests.get(self.url_main, timeout=self.timer)
+        self.r = requests.get(self.url_health, timeout=self.timer)
         self.assertEqual(self.r.status_code, 200)
         self.assertIsNotNone(self.r.json())
 

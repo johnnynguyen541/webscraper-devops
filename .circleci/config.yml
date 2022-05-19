@@ -8,6 +8,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Get Python3 Version
+          command: python3 --version
+      - run:
           name: Install all linting tools for project
           command: make install-lint
       - run:
@@ -33,7 +36,7 @@ jobs:
           command: make install-unit-test
       - run:
           name: Run Python Application
-          command: python src/scrape-api/app.py
+          command: python3 src/scrape-api/app.py
       - run:
           name: Python Unit Tests
           command: make test-unit

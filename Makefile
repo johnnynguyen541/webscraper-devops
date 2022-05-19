@@ -1,7 +1,10 @@
-install-lint:
-	echo "Install Linting tools"
+install-python-lint:
+	echo "Install Python Linting tools"
 	pip3 install --upgrade pip &&\
 		pip3 install -r lint/requirements.txt
+
+install-hadolint:
+	echo "Install hadolint"
 	wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
     chmod +x /bin/hadolint
 

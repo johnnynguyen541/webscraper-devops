@@ -26,8 +26,11 @@ jobs:
       - checkout
       - ubuntu-install-pip3
       - run:
-          name: Install all linting tools for project
-          command: make install-lint
+          name: Install all python linting tools for project
+          command: make install-python-lint
+      - run:
+          name: Install hadolint for docker linting
+          command: sudo make install-hadolint
       - run:
           name: Lint Python Unit Tests
           command: make lint-python

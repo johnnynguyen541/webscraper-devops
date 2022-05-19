@@ -14,25 +14,25 @@ class TestCaseScrapeAPIEndpoints(unittest.TestCase):
         self.timer = 5
 
     def test_1_check_main_get_request(self):
-        print(f"\nTest Case 1 [/]: Check status code and message\n")
+        print(f"\nCase 1 [/]: Check status and message\n")
         self.r = requests.get(self.url_main, timeout=self.timer)
         self.assertEqual(self.r.status_code, 200)
         self.assertIsNotNone(self.r.json())
 
     def test_2_check_cm_get_request(self):
-        print(f"\nTest Case 2 [/config-management]: Check status code and message\n")
+        print(f"\nCase 2 [/config-management]: Check status and message\n")
         self.r = requests.get(self.url_cm, timeout=self.timer)
         self.assertEqual(self.r.status_code, 200)
         self.assertIsNotNone(self.r.json())
-    
+
     def test_3_check_co_get_request(self):
-        print(f"\nTest Case 3 [/containers]: Check status code and message\n")
+        print(f"\nCase 3 [/containers]: Check status and message\n")
         self.r = requests.get(self.url_co, timeout=self.timer)
         self.assertEqual(self.r.status_code, 200)
         self.assertIsNotNone(self.r.json())
 
-    def test_4_check_cm_get_request(self):
-        print(f"\nTest Case 4 [/health]: Check status code and message\n")
+    def test_4_check_health_get_request(self):
+        print(f"\nCase 4 [/health]: Check status and message\n")
         self.r = requests.get(self.url_health, timeout=self.timer)
         self.assertEqual(self.r.status_code, 200)
         self.assertIsNotNone(self.r.json())

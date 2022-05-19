@@ -1,27 +1,48 @@
 ---
 version: 2.1
 
-orbs:
-  python: circleci/python@1.4.0
-
 jobs:
-  lint-cloud-formation:
+  lint:
     docker:
-      - image: cimg/python:3.8.5
+      - image: cimg/base:stable-20.04
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
       - run:
-          name: AWS CloudFormation Linting
-          command: cfn-lint aws-cf/*.yml
+          name: Install all linting tools for project
+          command: make install-lint
       - run:
-          name: ERROR FOUND
-          command: echo "Error found during lint"
-          when: on_fail
+          name: Lint Python Unit Tests
+          command: make lint-python
+      - run:
+          name: Lint Dockerfile for scrape-api
+          command: make lint-docker
+      - run:
+          name: Lint AWS CloudFormation Templates
+          command: make lint-aws-cf
+  
+  build-and-test:
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - run:
+          name: Install all Python Application Libraries
+          command: make install-scrape-api
+      - run:
+          name: Install all Python Unit Test Libraries
+          command: make install-unit-test
+      - run:
+          name: Run Python Application
+          command: python src/scrape-api/app.py
+      - run:
+          name: Python Unit Tests
+          command: make test-unit
 
 workflows:
-  build-and-lint:
+  blue-green-pipeline:
     jobs:
-      - lint-cloud-formation
+      - lint
+      - build-and-test:
+          requires:
+            - lint
 ...

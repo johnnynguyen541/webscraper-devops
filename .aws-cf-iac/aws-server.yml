@@ -18,7 +18,7 @@ Parameters:
   
   AmiID:
     Description: AMI ID of EC2 Instances (Ubuntu)
-    Type: String
+    Type: AWS::EC2::Image::Id
 
   EC2ServerType:
     Description: Autoscale EC2 Instance Type
@@ -140,7 +140,7 @@ Resources:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
       UserData:
-        Fn::Base64: !Sub |
+        Fn::Base64: |
           #!/bin/bash
           apt-get update -y
       ImageId: !Ref AmiID

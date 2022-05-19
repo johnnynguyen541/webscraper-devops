@@ -4,7 +4,7 @@ FROM python:3.8.9
 WORKDIR /scrape-api
 
 # Copy source code to working directory
-ADD . /scrape-api
+COPY . /scrape-api
 
 # Install packages from requirements.txt
 # hadolint ignore=DL3013,DL3042

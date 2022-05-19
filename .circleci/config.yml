@@ -1,0 +1,27 @@
+---
+version: 2.1
+
+orbs:
+  python: circleci/python@1.4.0
+
+jobs:
+  lint-cloud-formation:
+    docker:
+      - image: cimg/python:3.8.5
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: AWS CloudFormation Linting
+          command: cfn-lint aws-cf/*.yml
+      - run:
+          name: ERROR FOUND
+          command: echo "Error found during lint"
+          when: on_fail
+
+workflows:
+  build-and-lint:
+    jobs:
+      - lint-cloud-formation
+...

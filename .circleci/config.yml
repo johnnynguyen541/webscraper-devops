@@ -48,6 +48,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+          version: 20.10.11
       - ubuntu-install-pip3
       - run:
           name: Install all Python Application Libraries
@@ -56,17 +57,21 @@ jobs:
           name: Install all Python Unit Test Libraries
           command: make install-unit-test
       - run:
-          name: Run Python Application and Unit Test
+          name: Run Python Application
           command: |
             cd src/scrape-api/
             ./run_docker.sh
             cd ..
             cd ..
-            sleep 30
-            make test-unit
-      #- run:
-      #    name: Python Unit Tests
-      #    command: make test-unit
+      - run:
+          name: Python Unit Tests
+          command: |
+            sleep 15
+            ssh remote-docker
+            curl 127.0.0.1:5001/
+            curl 127.0.0.1:5001/config-management
+            curl 127.0.0.1:5001/containers
+            curl 127.0.0.1:5001/health
 
 workflows:
   blue-green-pipeline:

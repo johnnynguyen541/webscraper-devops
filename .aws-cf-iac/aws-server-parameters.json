@@ -1,0 +1,18 @@
+[
+	{
+		"ParameterKey": "EnvironmentName",
+		"ParameterValue": "WebscraperCluster"
+	},
+	{
+		"ParameterKey": "JumpboxKey",
+		"ParameterValue": "jonnypottie-jumpbox"
+	},
+	{
+		"ParameterKey": "AmiID",
+		"ParameterValue": "ami-0892d3c7ee96c0bf7"
+	},
+	{
+		"ParameterKey": "EC2ServerType",
+		"ParameterValue": "t2.micro"
+	}
+]

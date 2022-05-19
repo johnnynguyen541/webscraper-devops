@@ -1,15 +1,30 @@
 ---
 version: 2.1
 
+commands:
+  ubuntu-install-pip3:
+    description: "Install pip3 onto image"
+    steps:
+      - run:
+          name: Get Python3 Version
+          command: python3 --version
+      - run:
+          name: Update apt
+          command: sudo apt update
+      - run:
+          name: Install pip3
+          command: sudo apt install python3-pip
+      - run:
+          name: Get pip3 version
+          command: pip3 --version
+
 jobs:
   lint:
     docker:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
-      - run:
-          name: Get Python3 Version
-          command: python3 --version
+      - ubuntu-install-pip3
       - run:
           name: Install all linting tools for project
           command: make install-lint
@@ -28,6 +43,7 @@ jobs:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
+      - ubuntu-install-pip3
       - run:
           name: Install all Python Application Libraries
           command: make install-scrape-api

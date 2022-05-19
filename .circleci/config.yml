@@ -46,7 +46,8 @@ jobs:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
       - ubuntu-install-pip3
       - run:
           name: Install all Python Application Libraries
@@ -55,15 +56,17 @@ jobs:
           name: Install all Python Unit Test Libraries
           command: make install-unit-test
       - run:
-          name: Run Python Application
+          name: Run Python Application and Unit Test
           command: |
             cd src/scrape-api/
             ./run_docker.sh
             cd ..
             cd ..
-      - run:
-          name: Python Unit Tests
-          command: make test-unit
+            sleep 30
+            make test-unit
+      #- run:
+      #    name: Python Unit Tests
+      #    command: make test-unit
 
 workflows:
   blue-green-pipeline:

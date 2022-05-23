@@ -140,6 +140,7 @@ jobs:
             cd ~/
             cat inventory.txt
             cat OLD_WORKFLOW_ID.txt
+            echo "Contents Listed"
       - persist_to_workspace:
           root: ~/
           paths:

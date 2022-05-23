@@ -71,4 +71,10 @@ Outputs:
     Value: !GetAtt WebAppLB.DNSName
     Export:
       Name: !Sub ${EnvironmentName}-lb-url
+  
+  WorkflowID:
+    Value: !Sub ${ID}
+    Description: URL for Website on ALB
+    Export:
+      Name: WorkflowID
 ...

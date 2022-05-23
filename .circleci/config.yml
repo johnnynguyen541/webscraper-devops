@@ -18,6 +18,20 @@ commands:
           name: Get pip3 version
           command: pip3 --version
 
+  ubuntu-install-aws:
+    description: "Install AWS on Ubuntu"
+    steps:
+      - run:
+          name: Update Apt
+          command: |
+            # Update Apt
+            sudo apt update
+      - run:
+          name: Install AWS and dependencies
+          command: |
+            # install the dependencies needed for your playbook
+            sudo apt -y install awscli
+
   destroy-environment-on-fail:
     description: Destroy Cloudformation stacks given a Workflow ID
     parameters:
@@ -156,6 +170,8 @@ jobs:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
+      - ubuntu-install-pip3
+      - ubuntu-install-aws
       - add_ssh_keys:
           fingerprints:
             71:99:cb:c3:f9:9c:39:03:cf:fb:87:29:29:e1:f9:a9
@@ -173,6 +189,8 @@ jobs:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
+      - ubuntu-install-pip3
+      - ubuntu-install-aws
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   
@@ -181,6 +199,8 @@ jobs:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
+      - ubuntu-install-pip3
+      - ubuntu-install-aws
       - attach_workspace:
           at: /tmp/workspace
       - run:

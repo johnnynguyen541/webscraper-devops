@@ -126,7 +126,7 @@ jobs:
           name: Ensure back-end infrastructure exists
           command: |
             cd .aws-cf-iac
-            ./bash-create.sh webscraper-servers-${CIRCLE_WORKFLOW_ID:0:7} aws-server.yml ${CIRCLE_WORKFLOW_ID:0:7}
+            ./bash-create.sh webscraper-servers-${CIRCLE_WORKFLOW_ID:0:7} aws-servers.yml ${CIRCLE_WORKFLOW_ID:0:7}
       - run:
           name: Add back-end ip to ansible inventory
           command: |

@@ -85,8 +85,19 @@ jobs:
             ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
             ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
             ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+
+  upload-docker:
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - ubuntu-install-pip3
+      - run:
+          name: Autofail
+          command: |
+            exit 1
   
-  deploy-infrastructure:
+  destroy-environment-on-fail:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -133,11 +144,14 @@ workflows:
       - build-and-test:
           requires:
             - lint
-      - deploy-infrastructure:
+      - upload-docker:
           requires:
             - build-and-test
           filters:
             branches:
               only:
                 - main
+      - deploy-infrastructure:
+          requires:
+            - upload-docker
 ...

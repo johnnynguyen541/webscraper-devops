@@ -26,7 +26,7 @@ Parameters:
   EC2ServerType:
     Description: Autoscale EC2 Instance Type
     Type: String
-    Default: t2.medium
+    Default: t2.xlarge
 
   ID:
     Description: Unique identifier.
@@ -63,7 +63,7 @@ Resources:
       BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:
-            VolumeSize: '10'
+            VolumeSize: '20'
       UserData:
         Fn::Base64: |
           #!/bin/bash

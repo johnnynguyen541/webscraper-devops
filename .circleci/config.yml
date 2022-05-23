@@ -99,6 +99,7 @@ jobs:
           name: Upload Docker Image
           command: |
             cd src/scrape-api/
+            ./run_docker.sh
             ./upload_docker.sh
   
   deploy-infrastructure:
@@ -133,6 +134,12 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=webscraper-cluster-webserver-ec2-${CIRCLE_WORKFLOW_ID:0:7}" \
               --output text 2>&1 | tee -a  ~/inventory.txt
+      - run:
+          name: Check Text Files
+          command: |
+            cd ~/
+            cat inventory.txt
+            cat OLD_WORKFLOW_ID.txt
       - persist_to_workspace:
           root: ~/
           paths:

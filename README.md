@@ -1,6 +1,5 @@
 [![<CircleCI>](https://circleci.com/gh/johnnynguyen541/webscraper-cluster.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 
-
 # webscraper-cluster
 Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.
 
@@ -40,3 +39,17 @@ Python App Files   | Description
 
 ## Pipeline
 ![Blue/Green Deployment](pipeline.png)
+
+## How To Run
+
+```bash
+# Initialize Infrastructure for Pipeline
+./bash-create.sh webscraper-network aws-network.yml default          # NETWORK
+./bash-create.sh webscraper-iam-sgs aws-iam-and-sg.yml default       # IAM AND SG
+./bash-create.sh webscraper-jumpbox-default aws-jumpbox.yml default  # JUMPBOX
+./bash-create.sh webscraper-servers-1 aws-servers.yml 1              # SERVERS
+./bash-create.sh webscraper-alb aws-alb.yml 1                        # ALBS
+```
+
+After init, it should automatically run in Circle CI.  Ensure the following:
+- CircleCI set up with ENV DOCKER_PASSWORD

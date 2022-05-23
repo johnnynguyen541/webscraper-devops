@@ -86,16 +86,20 @@ jobs:
             ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
             ssh remote-docker \ curl --fail 127.0.0.1:5001/health
 
-  upload-docker:
+  upload-docker-image:
     docker:
       - image: cimg/base:stable-20.04
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 20.10.11
       - ubuntu-install-pip3
       - run:
-          name: Autofail
+          name: Upload Docker Image
           command: |
-            exit 1
+            cd src/scrape-api/
+            ./upload_docker.sh
   
   deploy-infrastructure:
     docker:
@@ -127,12 +131,12 @@ jobs:
             echo "[web-servers]" 2>&1 | tee -a ~/inventory.txt
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text 2>&1 | tee -a  .circleci/ansible/inventory.txt
+              --filters "Name=tag:Name,Values=webscraper-cluster-webserver-ec2-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --output text 2>&1 | tee -a  ~/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - inventory.txt
             - OLD_WORKFLOW_ID.txt
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
@@ -144,7 +148,7 @@ workflows:
       - build-and-test:
           requires:
             - lint
-      - upload-docker:
+      - upload-docker-image:
           requires:
             - build-and-test
           filters:
@@ -153,5 +157,5 @@ workflows:
                 - main
       - deploy-infrastructure:
           requires:
-            - upload-docker
+            - upload-docker-image
 ...

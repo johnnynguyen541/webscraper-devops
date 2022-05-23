@@ -191,14 +191,14 @@ jobs:
             # install the dependencies needed for your playbook
             sudo apt -y install tar gzip ansible awscli
       - run:
-          name: Configure Reverse Proxy Servers
+          name: Configure Reverse Proxy Server and Kubernetes Cluster
           command: |
             cd .ansible/
             ansible-playbook -i inventory.txt setup-reverse-proxy.yml
+            ansible-playbook -i inventory.txt setup-kubernetes-cluster.yml
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   
-  # TODO
   smoke-test:
     docker:
       - image: cimg/base:stable-20.04
@@ -206,6 +206,29 @@ jobs:
       - checkout
       - ubuntu-install-pip3
       - ubuntu-install-aws
+      - add_ssh_keys:
+          fingerprints:
+            71:99:cb:c3:f9:9c:39:03:cf:fb:87:29:29:e1:f9:a9
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: "Move Workspace Over"
+          command: mv /tmp/workspace/inventory.txt .ansible/.
+      - run:
+          name: Update Apt
+          command: |
+            # Update Apt
+            sudo apt update
+      - run:
+          name: Install dependencies
+          command: |
+            # install the dependencies needed for your playbook
+            sudo apt -y install tar gzip ansible awscli
+      - run:
+          name: Smoke Test
+          command: |
+            cd .ansible/
+            ansible-playbook -i inventory.txt smoke-test.yml
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   

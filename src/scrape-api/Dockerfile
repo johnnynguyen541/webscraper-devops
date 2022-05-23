@@ -6,7 +6,6 @@ WORKDIR /scrape-api
 # Copy source code to working directory
 COPY . /scrape-api
 
-FAILING CODE STATEMENT
 # Install packages from requirements.txt
 # hadolint ignore=DL3013,DL3042
 RUN pip install --upgrade pip &&\

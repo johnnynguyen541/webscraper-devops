@@ -150,6 +150,7 @@ jobs:
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   
+  # TODO
   configure-infrastructure:
     docker:
       - image: cimg/base:stable-20.04
@@ -163,6 +164,38 @@ jobs:
       - run:
           name: "Move Workspace Over"
           command: mv /tmp/workspace/inventory.txt .ansible/.
+      - destroy-environment-on-fail:
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+  
+  # TODO
+  smoke-test:
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - destroy-environment-on-fail:
+          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+  
+  blue-green-switch:
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: "Move Workspace Over"
+          command: mv /tmp/workspace/OLD_WORKFLOW_ID.txt .aws-cf-iac/.
+      - run:
+          name: Update ALB
+          command: |
+            cd .aws-cf-iac
+            ./bash-create.sh webscraper-alb aws-alb.yml ${CIRCLE_WORKFLOW_ID:0:7}
+      - run:
+          name: Delete old infrastructure
+          command: |
+            export OLD_WORKFLOW_ID=$(cat OLD_WORKFLOW_ID.txt)
+            ./bash-delete.sh webscraper-servers-${OLD_WORKFLOW_ID}
 
 workflows:
   blue-green-pipeline:

@@ -1,0 +1,11 @@
+---
+- name:   update apt packages
+  become: yes
+  apt:
+    update_cache: yes
+
+- name:   upgrade apt packages
+  become: yes
+  apt:
+    upgrade: yes
+...

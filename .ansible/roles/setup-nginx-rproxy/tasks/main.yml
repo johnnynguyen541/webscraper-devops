@@ -1,0 +1,46 @@
+---
+- name:   install nginx
+  become: yes
+  apt:
+    name:         nginx
+    state:        latest
+    update_cache: yes
+
+- name:          unlink default nginx settings
+  become:        yes
+  command:       unlink default
+  ignore_errors: yes
+  args:
+    chdir: /etc/nginx/sites-available/
+
+- name:   delete default sites-available file (or symlink) if it exists
+  become: yes
+  file:
+    path:  /etc/nginx/sites-available/default
+    state: absent
+
+- name:   delete default sites-enabled file (or symlink) if it exists
+  become: yes
+  file:
+    path:  /etc/nginx/sites-enabled/default
+    state: absent
+
+- name:   copies nginx config over
+  become: yes
+  copy:
+    src:        app-reverse-proxy
+    dest:       /etc/nginx/sites-available/app-reverse-proxy
+    remote_src: no
+
+- name:          link reverse proxy settings
+  become:        yes
+  ignore_errors: yes  # TODO TECH-DEBT 1 - IMPROVE ERROR HANDLING
+  command: ln -s /etc/nginx/sites-available/app-reverse-proxy /etc/nginx/sites-enabled/ 
+
+- name:   restart nginx service
+  become: yes
+  systemd:
+    state:         restarted
+    daemon_reload: yes
+    name:          nginx
+...

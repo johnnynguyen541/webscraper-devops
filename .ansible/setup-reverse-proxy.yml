@@ -1,0 +1,12 @@
+---
+ # Exercise for setting up a web server in an EC
+- name:          Setup Webserver with Nginx Reverse Proxy
+  hosts:         web-servers
+  user:          ubuntu
+  become:        true
+  become_method: sudo
+  become_user:   root
+  roles:
+    - apt-update
+    - setup-nginx-rproxy
+...

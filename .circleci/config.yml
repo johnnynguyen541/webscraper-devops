@@ -51,9 +51,9 @@ jobs:
       - run:
           name: Lint Dockerfile for scrape-api
           command: make lint-docker
-      - run:
-          name: Lint AWS CloudFormation Templates
-          command: make lint-aws-cf
+      #- run:
+      #    name: Lint AWS CloudFormation Templates
+      #    command: make lint-aws-cf
   
   build-and-test:
     docker:

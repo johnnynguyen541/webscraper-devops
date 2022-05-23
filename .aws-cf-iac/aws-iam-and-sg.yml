@@ -9,21 +9,6 @@ Parameters:
     Type: String
     Default: webscraper-cluster
 
-  JumpboxKey: 
-    Description: Key for Private EC2 Instance
-    Type: String
-    Default: jonnypottie-jumpbox
-  
-  AmiID:
-    Description: AMI ID of EC2 Instances (Ubuntu)
-    Type: AWS::EC2::Image::Id
-    Default: ami-0892d3c7ee96c0bf7
-
-  EC2ServerType:
-    Description: Autoscale EC2 Instance Type
-    Type: String
-    Default: t2.micro
-
   ID:
     Description: Unique identifier.
     Type: String

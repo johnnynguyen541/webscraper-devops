@@ -5,6 +5,11 @@
   become:        true
   become_method: sudo
   become_user:   root
+  environment:
+    - DOCKER_ID: "{{ lookup('env', 'DOCKER_ID')}}"
+    - DOCKER_PASSWORD: "{{ lookup('env', 'DOCKER_PASSWORD')}}"
+    - IMAGE_VERSION: "{{ lookup('env', 'IMAGE_VERSION')}}"
+    - TAG_ID: "{{ lookup('env', 'TAG_ID')}}"
   roles:
     - apt-update
     - setup-minikube

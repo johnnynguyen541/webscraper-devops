@@ -13,4 +13,12 @@
 - name:          Login to Dockerhub
   become:        yes
   command:       docker login --username $DOCKER_ID --password $DOCKER_PASSWORD
+
+- name:          Start Pod
+  become:        no
+  command:       kubectl run $TAG_ID --image=$DOCKER_ID/$TAG_ID:$IMAGE_VERSION  --port=5001
+
+- name:          Pause for 1 minutes to build pod
+  pause:
+    seconds:     30
 ...

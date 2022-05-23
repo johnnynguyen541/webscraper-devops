@@ -210,8 +210,11 @@ jobs:
           name: Update ALB and delete old Infra
           command: |
             cd .aws-cf-iac
+            echo "Pointing New albs to ${CIRCLE_WORKFLOW_ID:0:7}"
             ./bash-create.sh webscraper-alb aws-alb.yml ${CIRCLE_WORKFLOW_ID:0:7}
+
             export OLD_WORKFLOW_ID=$(cat OLD_WORKFLOW_ID.txt)
+            echo "Deleting old Servers at ${OLD_WORKFLOW_ID}"
             ./bash-delete.sh webscraper-servers-${OLD_WORKFLOW_ID}
 
 workflows:

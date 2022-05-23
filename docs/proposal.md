@@ -63,4 +63,4 @@ OK  // Status code 200
 ```
 
 ## Pipeline
-![Blue/Green Deployment](pipeline.png)
+![Blue/Green Deployment](pipeline-phase-1.png)

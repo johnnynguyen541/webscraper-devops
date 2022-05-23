@@ -38,7 +38,7 @@ Python App Files   | Description
 `requirements.txt` | Python Library requirements file
 
 ## Pipeline
-![Blue/Green Deployment](pipeline.png)
+![Blue/Green Deployment](docs/pipeline-phase-1.png)
 
 ## How To Run
 

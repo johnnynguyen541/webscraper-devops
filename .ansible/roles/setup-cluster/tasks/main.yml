@@ -9,4 +9,8 @@
 - name:          Start Minikube
   become:        no
   command:       minikube start
+
+- name:          Login to Dockerhub
+  become:        yes
+  command:       docker login --username $DOCKER_ID --password $DOCKER_PASSWORD
 ...

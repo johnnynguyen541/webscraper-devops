@@ -26,7 +26,7 @@ Parameters:
   EC2ServerType:
     Description: Autoscale EC2 Instance Type
     Type: String
-    Default: t2.2xlarge
+    Default: t2.micro
 
   ID:
     Description: Unique identifier.

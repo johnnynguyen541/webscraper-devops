@@ -191,7 +191,7 @@ jobs:
             # install the dependencies needed for your playbook
             sudo apt -y install tar gzip ansible awscli
       - run:
-          name: Configure server
+          name: Configure Reverse Proxy Servers
           command: |
             cd .ansible/
             ansible-playbook -i inventory.txt setup-reverse-proxy.yml

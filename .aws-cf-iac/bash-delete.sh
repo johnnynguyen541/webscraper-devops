@@ -19,8 +19,8 @@ Check_Kwargs_Count () {
     printf "Correct number of parameters\n"
   else
     printf "Incorrect number of parameters\n"
-    printf "Usage: ./delete.sh [STACK_NAME]\n"
-    printf "Example: ./delete.sh network\n"
+    printf "Usage: ./bash-delete.sh [STACK_NAME]\n"
+    printf "Example: ./bash-delete.sh network\n"
     exit 1
   fi
 }

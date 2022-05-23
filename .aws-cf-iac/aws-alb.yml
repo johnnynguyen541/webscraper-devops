@@ -1,0 +1,74 @@
+---
+Description: >
+  AWS CloudFormation script that creates Application Load Balancer
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resource names
+    Type: String
+    Default: webscraper-cluster
+
+  ID:
+    Description: Unique identifier.
+    Type: String
+    Default: Default
+
+  # In Addition, the Following Exports are used from aws-network.yml
+  # - VPC:                    ${EnvironmentName}-vpc
+  # - PublicSubnets:          ${EnvironmentName}-pubnets
+  # - PrivateSubnets:         ${EnvironmentName}-prinets
+  # - PublicSubnet1:          ${EnvironmentName}-pubnet1
+  # - PublicSubnet2:          ${EnvironmentName}-pubnet2
+  # - PrivateSubnet1:         ${EnvironmentName}-prinet1
+  # - PrivateSubnet2:         ${EnvironmentName}-prinet2
+  # - VPCPublicRouteTable:    ${EnvironmentName}-pubrt
+  # - VPCPrivateRouteTable1:  ${EnvironmentName}-prirt1
+  # - VPCPrivateRouteTable2:  ${EnvironmentName}-prirt2
+
+Resources:
+  # Security Groups
+  # Load Balancer
+  # LB - Resource
+  WebAppLB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Subnets:
+        - Fn::ImportValue: !Sub "${EnvironmentName}-pubnet1"
+        - Fn::ImportValue: !Sub "${EnvironmentName}-pubnet2"
+      SecurityGroups:
+        - Fn::ImportValue: !Sub ${EnvironmentName}-alb-sg
+
+  # LB - Listener
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn:
+            Fn::ImportValue: !Sub ${EnvironmentName}-asg-tg-${ID}
+      LoadBalancerArn:
+        Ref: WebAppLB
+      Port: '80'
+      Protocol: HTTP
+
+  # LB - Listener Rule
+  ALBListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn:
+            Fn::ImportValue: !Sub ${EnvironmentName}-asg-tg-${ID}
+      Conditions:
+        - Field: path-pattern
+          Values: [/]
+      ListenerArn: !Ref 'Listener'
+      Priority: 1
+
+Outputs: 
+  LBURL: 
+    Description: Load Balancer URL
+    Value: !GetAtt WebAppLB.DNSName
+    Export:
+      Name: !Sub ${EnvironmentName}-lb-url
+...

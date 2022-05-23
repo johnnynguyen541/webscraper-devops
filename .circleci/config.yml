@@ -97,7 +97,7 @@ jobs:
           command: |
             exit 1
   
-  destroy-environment-on-fail:
+  deploy-infrastructure:
     docker:
       - image: amazon/aws-cli
     steps:
@@ -134,7 +134,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
             - OLD_WORKFLOW_ID.txt
-      - destroy-environment :
+      - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
 workflows:

@@ -77,7 +77,7 @@ Resources:
     Properties:
       VPCZoneIdentifier:
         - Fn::ImportValue: 
-            !Sub "${EnvironmentName}-prinets"
+            !Sub "${EnvironmentName}-pubnets"
       LaunchConfigurationName:
         Ref: WebAppLaunchConfig
       MinSize: '1'

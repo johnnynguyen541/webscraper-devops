@@ -149,6 +149,20 @@ jobs:
             - OLD_WORKFLOW_ID.txt
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+  
+  configure-infrastructure:
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            71:99:cb:c3:f9:9c:39:03:cf:fb:87:29:29:e1:f9:a9
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: "Move Workspace Over"
+          command: mv /tmp/workspace/inventory.txt .ansible/.
 
 workflows:
   blue-green-pipeline:
@@ -167,4 +181,13 @@ workflows:
       - deploy-infrastructure:
           requires:
             - upload-docker-image
+      - configure-infrastructure:
+          requires:
+            - deploy-infrastructure
+      - smoke-test:
+          requires:
+            - configure-infrastructure
+      - blue-green-switch:
+          requires:
+            - smoke-test
 ...

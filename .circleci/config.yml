@@ -194,7 +194,7 @@ jobs:
           name: Configure server
           command: |
             cd .ansible/
-            ansible-playbook -i inventory.txt configure-server.yml
+            ansible-playbook -i inventory.txt setup-reverse-proxy.yml
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   

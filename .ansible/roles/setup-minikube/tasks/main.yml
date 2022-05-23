@@ -1,0 +1,22 @@
+---
+- name:          Download Minikube
+  become:        yes
+  command:       wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+  ignore_errors: no
+  args:
+    chdir:       /tmp/
+
+- name:         Copy minikube to path
+  become:       yes
+  copy:
+    src:        /tmp/minikube-linux-amd64
+    dest:       /usr/local/bin/minikube
+    owner:      ubuntu
+    group:      ubuntu
+    mode:       '0755'
+    remote_src: yes
+
+- name:          Test Minikube Version
+  become:        no
+  command:       minikube version
+...

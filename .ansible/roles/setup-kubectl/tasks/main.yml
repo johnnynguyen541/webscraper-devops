@@ -1,0 +1,17 @@
+---
+- name:          Download Minikube
+  become:        yes
+  command:       curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+  args:
+    chdir:       /tmp/
+
+- name:         Copy kubectl to path
+  become:       yes
+  copy:
+    src:        /tmp/kubectl
+    dest:       /usr/local/bin/kubectl
+    owner:      ubuntu
+    group:      ubuntu
+    mode:       '0775'
+    remote_src: yes
+...

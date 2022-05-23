@@ -1,0 +1,13 @@
+---
+- name:          Setup Webservers with Kubernetes Clusters
+  hosts:         web-servers
+  user:          ubuntu
+  become:        true
+  become_method: sudo
+  become_user:   root
+  roles:
+    - apt-update
+    - setup-minikube
+    - setup-kubectl
+    - setup-docker
+...

@@ -207,13 +207,10 @@ jobs:
           name: "Move Workspace Over"
           command: mv /tmp/workspace/OLD_WORKFLOW_ID.txt .aws-cf-iac/.
       - run:
-          name: Update ALB
+          name: Update ALB and delete old Infra
           command: |
             cd .aws-cf-iac
             ./bash-create.sh webscraper-alb aws-alb.yml ${CIRCLE_WORKFLOW_ID:0:7}
-      - run:
-          name: Delete old infrastructure
-          command: |
             export OLD_WORKFLOW_ID=$(cat OLD_WORKFLOW_ID.txt)
             ./bash-delete.sh webscraper-servers-${OLD_WORKFLOW_ID}
 

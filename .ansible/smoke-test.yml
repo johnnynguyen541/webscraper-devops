@@ -1,11 +1,10 @@
 ---
-- name:          Setup Webserver with Nginx Reverse Proxy
+- name:          Smoke Test for Cluster
   hosts:         web-servers
   user:          ubuntu
   become:        true
   become_method: sudo
   become_user:   root
   roles:
-    - apt-update
-    - setup-nginx-rproxy
+    - test-servers
 ...

@@ -21,4 +21,10 @@
 - name:          Pause for 1 minutes to build pod
   pause:
     seconds:     30
+
+- name:          Port Forward Kubectl
+  become:        no
+  command:       kubectl port-forward --address 127.0.0.1 pods/$TAG_ID 5001:5001
+  async:         10
+  poll:          0
 ...

@@ -10,4 +10,5 @@
     - setup-minikube
     - setup-kubectl
     - setup-docker
+    - setup-cluster
 ...

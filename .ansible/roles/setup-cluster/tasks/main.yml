@@ -1,2 +1,12 @@
 ---
+- name:          Setup Minikube Driver Part 1
+  become:        yes
+  command:       usermod -aG docker ubuntu
+
+- name:          Reset ssh connection
+  meta:          reset_connection
+
+- name:          Start Minikube
+  become:        no
+  command:       minikube start
 ...

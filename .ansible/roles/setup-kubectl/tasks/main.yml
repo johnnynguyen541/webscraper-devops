@@ -1,9 +1,8 @@
 ---
-- name:          Download Minikube
-  become:        yes
-  command:       curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-  args:
-    chdir:       /tmp/
+- name:    Download Kubectl binary
+  get_url:
+    dest:  /tmp/kubectl
+    url:   "https://storage.googleapis.com/kubernetes-release/release/v1.24.0/bin/linux/amd64/kubectl"
 
 - name:         Copy kubectl to path
   become:       yes

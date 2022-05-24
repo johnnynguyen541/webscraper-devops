@@ -18,13 +18,13 @@
   become:        no
   command:       kubectl run $TAG_ID --image=$DOCKER_ID/$TAG_ID:$IMAGE_VERSION  --port=5001
 
-- name:          Pause for 1 minutes to build pod
+- name:          Pause for 40 seconds to build pod
   pause:
-    seconds:     30
+    seconds:     40
 
 - name:          Port Forward Kubectl
   become:        no
   command:       kubectl port-forward --address 127.0.0.1 pods/$TAG_ID 5001:5001
-  async:         10
+  async:         20
   poll:          0
 ...

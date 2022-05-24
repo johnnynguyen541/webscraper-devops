@@ -164,7 +164,6 @@ jobs:
       - destroy-environment-on-fail:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   
-  # TODO
   configure-infrastructure:
     docker:
       - image: cimg/base:stable-20.04
@@ -196,8 +195,8 @@ jobs:
             cd .ansible/
             ansible-playbook -i inventory.txt setup-reverse-proxy.yml
             ansible-playbook -i inventory.txt setup-kubernetes-cluster.yml
-      - destroy-environment-on-fail:
-          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+      #- destroy-environment-on-fail:
+      #    workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   
   smoke-test:
     docker:
@@ -229,8 +228,8 @@ jobs:
           command: |
             cd .ansible/
             ansible-playbook -i inventory.txt smoke-test.yml
-      - destroy-environment-on-fail:
-          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
+      #- destroy-environment-on-fail:
+      #    workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
   
   blue-green-switch:
     docker:

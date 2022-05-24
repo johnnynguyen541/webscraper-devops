@@ -1,5 +1,3 @@
-[![<CircleCI>](https://circleci.com/gh/johnnynguyen541/webscraper-cluster.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
-
 # webscraper-cluster
 Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.
 

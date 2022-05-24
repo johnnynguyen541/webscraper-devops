@@ -10,9 +10,15 @@
   become:        no
   command:       minikube start
 
+- name:          Pause for 15 seconds for Minikube to settle
+  pause:
+    seconds:     40
+
 - name:          Login to Dockerhub
-  become:        yes
+  become:        no
   command:       docker login --username $DOCKER_ID --password $DOCKER_PASSWORD
+  async:         20
+  poll:          0
 
 - name:          Start Pod
   become:        no

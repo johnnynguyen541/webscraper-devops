@@ -1,53 +1,67 @@
-# webscraper-cluster
-Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.
+# Web Scraper DevOps Project
+
+Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.  This is the 2nd iteration of the Udacity Capstone project seen at this link here: [Github johnnynguyen541/webscraper-cluster](https://github.com/johnnynguyen541/webscraper-cluster).  The main updates are:
+- Tech Debt Updates
+- Migration of tech to more modern tech
+    - From AWS CloudFormation to Terraform
+    - From CircleCI to Jenkins
+- Adding New Tech to full pipeline for observability and other purposes
+    - Grafana
+    - New Relic
+    - Prometheus
+    - Splunk
+- Expanding the functionality
+    - Updating code to have an `API service` and a `bot service`
+    - Also use an RDS Cluster
+
+See [Project Overview](docs/project-overview.md) for more specific info.
 
 ### Tech Stack
+
 Technology         | Purpose
 ------------------ | ------------------
 AWS                | Cloud Provider
 Ansible            | IaC (Configuration Management)
 Bash/Linux         | Scripting Language/OS
-CircleCI           | CI/CD Tool
-CloudFormation     | IaC (Infrastructure Provisioning)
 Docker             | IaC (Containerization)
 Flask              | Python Web Framework for REST API
+Grafana            | Data Visualization Tool
+Jenkins            | CI/CD Build Tool
 Kubernetes         | IaC (Container Orchestration)
+New Relic          | Logging
+Prometheus         | Infrastructure Monitoring
 Python             | Programming Language
+Splunk             | Logging
+Swagger            | REST API Documentation
+Terraform          | IaC (Infrastructure Provisioning)
 
 ### Project Structure
+
 Files/Folders      | Description
 ------------------ | ------------------
 `.ansible/`        | Ansible Playbooks for Infrastructure
-`.aws-cf-iac/`     | CloudFormation IaC Files
-`.circleci/`       | CircleCI CI/CD Configuration File
-`bash/`            | Bash Scripts (ie. `run_docker.sh`, `run_kubernetes.sh`, `upload_docker.sh`)
+`.jenkins/`        | Jenkins Configs and Groovy Scripts
+`.tfinfra/`        | Terraform IaC Files
+`bash/`            | General Project Bash Scripts
 `config/`          | Configuration Files used for Application and scripts
-`docs/`            | Project Documents ie. [proposal.md](docs/proposal.md), [requirements.md](docs/requirements.md), and [pipeline.drawio](docs/pipeline.drawio)/[pipeline.png](docs/pipeline.png)
-`output/`          | Output Screen Shots
-`src/`             | Project Applications - `scrape-api`
+`docs/`            | Docs ie. [pipeline.png](docs/pipeline.png)
+`lint/`            | Linting files
+`src/`             | Project Apps - `scrape-api` - `scrape-bot`
 `tests/`           | Unit Tests
 `LICENSE.md`       | License for Project
-`Makefile`         | Makefile with steps: setup, install, test, lint, and all
+`Makefile`         | Makefile: setup, install, test, lint, and all
 `README.md`        | Project README file
 
 Python App Files   | Description
 ------------------ | ------------------
+`app/`             | Python Application Files
 `Dockerfile`       | Docker Build File
 `requirements.txt` | Python Library requirements file
 
 ## Pipeline
-![Blue/Green Deployment](docs/pipeline-phase-1.png)
+
+![Blue/Green Deployment](docs/pipeline.png)
 
 ## How To Run
 
-```bash
-# Initialize Infrastructure for Pipeline
-./bash-create.sh webscraper-network aws-network.yml default          # NETWORK
-./bash-create.sh webscraper-iam-sgs aws-iam-and-sg.yml default       # IAM AND SG
-./bash-create.sh webscraper-jumpbox-default aws-jumpbox.yml default  # JUMPBOX
-./bash-create.sh webscraper-servers-1 aws-servers.yml 1              # SERVERS
-./bash-create.sh webscraper-alb aws-alb.yml 1                        # ALBS
-```
-
-After init, it should automatically run in Circle CI.  Ensure the following:
-- CircleCI set up with ENV DOCKER_PASSWORD
+TBD

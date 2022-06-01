@@ -1,3 +1,35 @@
+# Mac
+.idea/
+.DS_Store
+
+#############
+# Terraform #
+#############
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# TF Overrides
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# TF Plan.out
+*plan.out
+
+# TF Lock Files
+*.terraform.lock.hcl
+
+##########
+# Python #
+##########
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

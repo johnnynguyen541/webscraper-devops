@@ -16,7 +16,7 @@ export DOCKERPATH="$DOCKER_ID/$TAG_ID:$IMAGE_VERSION"
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $DOCKERPATH"
-docker login --username $DOCKER_ID --password $DOCKER_PASSWORD
+docker login --username $DOCKER_ID --password "$DOCKER_PASSWORD"
 docker tag $TAG_ID $DOCKERPATH
 
 # Step 3:

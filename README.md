@@ -64,4 +64,19 @@ Python App Files   | Description
 
 ## How To Run
 
+### Install Linux
+
+You must also install the Linux Packages in packages.txt.  Run the following in sudo:
+
+`xargs -a lint/debian-packages.txt apt install`
+
+### Install Hadolint
+
+To install Hadolint
+
+```shell
+sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
+sudo chmod +x /bin/hadolint
+```
+
 TBD

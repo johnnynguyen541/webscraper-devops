@@ -1,0 +1,11 @@
+---
+version: 2.1
+
+orbs:
+  github-super-linter: circleci/github-super-linter@1.0
+
+workflows:
+  webscraper-devops-pipeline:
+    jobs:
+      - github-super-linter/lint
+...

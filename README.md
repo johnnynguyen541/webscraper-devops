@@ -23,6 +23,7 @@ Technology         | Purpose
 AWS                | Cloud Provider
 Ansible            | IaC (Configuration Management)
 Bash/Linux         | Scripting Language/OS
+CircleCI           | CI/CD Build Tool
 Docker             | IaC (Containerization)
 Flask              | Python Web Framework for REST API
 Grafana            | Data Visualization Tool
@@ -40,6 +41,7 @@ Terraform          | IaC (Infrastructure Provisioning)
 Files/Folders      | Description
 ------------------ | ------------------
 `.ansible/`        | Ansible Playbooks for Infrastructure
+`.circleci/`       | CircleCI Config Script
 `.jenkins/`        | Jenkins Configs and Groovy Scripts
 `.tfinfra/`        | Terraform IaC Files
 `bash/`            | General Project Bash Scripts

@@ -12,8 +12,11 @@ install-lint-bash:
 	./bash/install-lint-bash.sh
 
 install-lint-circleci:
-	echo "Install CircleCI (YAML) Linter: ansible-lint"
-	echo "TODO - Link: https://github.com/adrienverge/yamllint"
+	echo "Install CircleCI (YAML) Linter: yamllint"
+	apt update
+	apt -y install python3-pip
+	pip3 install --upgrade pip &&\
+		pip3 install -r lint/lint-circleci-requirements.txt
 
 install-lint-docker:
 	echo "Install Docker Linter: hadolint"
@@ -70,8 +73,8 @@ lint-bash:
 	find $(pwd) -iname *.sh | xargs shellcheck
 
 lint-circleci:
-	echo "CircleCI (YAML) Linter: ansible-lint"
-	echo "TODO - Link: https://github.com/adrienverge/yamllint"
+	echo "CircleCI (YAML) Linter: yamllint"
+	yamllint .circleci/config.yml
 
 lint-docker:
 	# See local hadolint install instructions:   https://github.com/hadolint/hadolint

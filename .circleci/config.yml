@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Run Ansible Linter
           command: sudo make lint-ansible
-  
+
   lint-bash:
     description: |
       Lint Bash shell scripts in entire project directory
@@ -46,7 +46,7 @@ jobs:
       - run:
           name: Run YAML Check
           command: sudo make lint-circleci
-  
+
   lint-docker:
     description: |
       Lint Dockerfiles in src/*/ directory
@@ -60,7 +60,7 @@ jobs:
       - run:
           name: Run Hadolint
           command: sudo make lint-docker
-  
+
   lint-groovy:
     description: |
       Lint Groovy scripts in .jenkins directory
@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Run Groovy Linter
           command: sudo make lint-groovy
-  
+
   lint-python:
     description: |
       Lint Python Code and Unit Tests
@@ -88,7 +88,7 @@ jobs:
       - run:
           name: Run Pycodestyle
           command: sudo make lint-python
-  
+
   lint-tflint:
     description: |
       Lint Terraform Code

@@ -12,8 +12,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-ansible
-      - lint-ansible
+      - run:
+          name: Install Ansible Linter
+          command: sudo make install-lint-ansible
+      - run:
+          name: Run Ansible Linter
+          command: sudo make lint-ansible
   
   lint-bash:
     description: |
@@ -22,8 +26,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-bash
-      - lint-bash
+      - run:
+          name: Install Bash Linter - Shell Check
+          command: sudo make install-lint-bash
+      - run:
+          name: Run Shell Check Linter
+          command: sudo make lint-bash
 
   lint-circleci:
     description: |
@@ -32,8 +40,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-circleci
-      - lint-circleci
+      - run:
+          name: Install CircleCI Linter - YAML Check
+          command: sudo make install-lint-circleci
+      - run:
+          name: Run YAML Check
+          command: sudo make lint-circleci
   
   lint-docker:
     description: |
@@ -42,8 +54,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-docker
-      - lint-docker
+      - run:
+          name: Install Hadolint
+          command: sudo make install-lint-docker
+      - run:
+          name: Run Hadolint
+          command: sudo make lint-docker
   
   lint-groovy:
     description: |
@@ -52,8 +68,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-groovy
-      - lint-groovy
+      - run:
+          name: Install Groovy Linter
+          command: sudo make install-lint-groovy
+      - run:
+          name: Run Groovy Linter
+          command: sudo make lint-groovy
   
   lint-python:
     description: |
@@ -62,8 +82,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-python
-      - lint-python
+      - run:
+          name: Install Python Linter - Pycodestyle
+          command: sudo make install-lint-python
+      - run:
+          name: Run Pycodestyle
+          command: sudo make lint-python
   
   lint-tflint:
     description: |
@@ -72,9 +96,12 @@ jobs:
       - image: cimg/base:current-22.04
     steps:
       - checkout
-      - install-lint-tflint
-      - lint-tflint
-
+      - run:
+          name: Install Terraform Linter - tflint
+          command: sudo make install-lint-tflint
+      - run:
+          name: Run tflint
+          command: sudo make lint-pyttflinthon
 
 workflows:
   webscraper-devops-pipeline:

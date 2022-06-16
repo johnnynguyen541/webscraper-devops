@@ -4,8 +4,87 @@ version: 2.1
 orbs:
   github-super-linter: circleci/github-super-linter@1.0
 
+jobs:
+  lint-ansible:
+    description: |
+      Lint Ansible Playbooks under Project Path: .ansible/
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-ansible
+      - lint-ansible
+  
+  lint-bash:
+    description: |
+      Lint Bash shell scripts in entire project directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-bash
+      - lint-bash
+
+  lint-circleci:
+    description: |
+      Lint CircleCI scripts in .circleci directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-circleci
+      - lint-circleci
+  
+  lint-docker:
+    description: |
+      Lint Dockerfiles in src/*/ directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-docker
+      - lint-docker
+  
+  lint-groovy:
+    description: |
+      Lint Groovy scripts in .jenkins directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-groovy
+      - lint-groovy
+  
+  lint-python:
+    description: |
+      Lint Python Code and Unit Tests
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-python
+      - lint-python
+  
+  lint-tflint:
+    description: |
+      Lint Terraform Code
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - install-lint-tflint
+      - lint-tflint
+
+
 workflows:
   webscraper-devops-pipeline:
     jobs:
-      - github-super-linter/lint
+      # - github-super-linter/lint
+      - lint-ansible
+      - lint-bash
+      - lint-circleci
+      - lint-docker
+      - lint-groovy
+      - lint-python
+      - lint-tflint
 ...

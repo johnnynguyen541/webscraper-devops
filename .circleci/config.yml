@@ -101,7 +101,7 @@ jobs:
           command: sudo make install-lint-tflint
       - run:
           name: Run tflint
-          command: sudo make lint-pyttflinthon
+          command: sudo make lint-tflint
 
 workflows:
   webscraper-devops-pipeline:

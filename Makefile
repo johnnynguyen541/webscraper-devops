@@ -25,6 +25,8 @@ install-lint-groovy:
 
 install-lint-python:
 	echo "Install Python Linter: Required Libraries"
+	apt update
+	apt -y install python3-pip
 	pip3 install --upgrade pip &&\
 		pip3 install -r lint/lint-python-requirements.txt
 

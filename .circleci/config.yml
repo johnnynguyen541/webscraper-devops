@@ -106,7 +106,7 @@ jobs:
 workflows:
   webscraper-devops-pipeline:
     jobs:
-      # - github-super-linter/lint
+      ## - github-super-linter/lint
       - lint-ansible
       - lint-bash
       - lint-circleci

@@ -4,6 +4,23 @@ version: 2.1
 orbs:
   github-super-linter: circleci/github-super-linter@1.0
 
+commands:
+  ubuntu-install-pip3:
+    description: "Install pip3 onto image"
+    steps:
+      - run:
+          name: Get Python3 Version
+          command: python3 --version
+      - run:
+          name: Update apt
+          command: sudo apt update
+      - run:
+          name: Install pip3
+          command: sudo apt install python3-pip
+      - run:
+          name: Get pip3 version
+          command: pip3 --version
+
 jobs:
   lint-ansible:
     description: |
@@ -103,6 +120,38 @@ jobs:
           name: Run tflint
           command: sudo make lint-tflint
 
+  unit-test:
+    description: |
+      Unit Test Python Applications
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 20.10.11
+      - ubuntu-install-pip3
+      - run:
+          name: Install all Python Application Libraries
+          command: make install-app-scrape-api
+      - run:
+          name: Install all Python Unit Test Libraries
+          command: make install-test-unit
+      - run:
+          name: Run Python Application
+          command: | Update config.yml
+            ./run_docker.sh
+            cd ..
+            cd ..
+      - run:
+          name: Python Unit Tests
+          command: |
+            sleep 15
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+
 workflows:
   webscraper-devops-pipeline:
     jobs:
@@ -114,4 +163,14 @@ workflows:
       - lint-groovy
       - lint-python
       - lint-tflint
+      - unit-test:
+          requires:
+            - lint-ansible
+            - lint-bash
+            - lint-circleci
+            - lint-docker
+            - lint-groovy
+            - lint-python
+            - lint-tflint
+
 ...

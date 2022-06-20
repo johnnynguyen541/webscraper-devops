@@ -42,7 +42,7 @@ install-lint-tflint:
 	./bash/install-lint-tflint.sh
 
  # OTHER INSTALLS
-install-scrape-api:
+install-app-scrape-api:
 	echo "Install Scrape API library"
 	pip3 install --upgrade pip &&\
 		pip3 install -r src/scrape-api/requirements.txt

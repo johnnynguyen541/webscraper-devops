@@ -4,7 +4,10 @@
 
 install-lint-ansible:
 	echo "Install Ansible Linter: ansible-lint"
-	echo "TODO - Link: https://ansible-lint.readthedocs.io/en/latest/installing/"
+	apt update
+	apt -y install python3-pip
+	pip3 install --upgrade pip &&\
+		pip3 install -r lint/lint-ansible-requirements.txt
 
 install-lint-bash:
 	echo "Install Bash Linter: Linux Shell Check"
@@ -24,7 +27,8 @@ install-lint-docker:
 
 install-lint-groovy:
 	echo "Install Groovy Linter: TBD"
-	echo "TODO - Link: https://github.com/nvuillam/npm-groovy-lint"
+	apt update
+	./bash/install-lint-groovy.sh
 
 install-lint-python:
 	echo "Install Python Linter: Required Libraries"
@@ -66,7 +70,7 @@ install-lint-all:
 
 lint-ansible:
 	echo "Ansible Linter: ansible-lint"
-	echo "TODO - Link: https://ansible-lint.readthedocs.io/en/latest/installing/"
+	ansible-lint
 
 lint-bash:
 	echo "Lint Bash Scripts"
@@ -82,8 +86,8 @@ lint-docker:
 	hadolint src/*/Dockerfile
 
 lint-groovy:
-	echo "Groovy Linter: TBD"
-	echo "TODO - Link: https://github.com/nvuillam/npm-groovy-lint"
+	echo "Groovy Linter"
+	npm-groovy-lint .jenkins/
 
 lint-python:
 	echo "Lint Python Unit Tests"

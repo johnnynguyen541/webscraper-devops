@@ -1,6 +1,10 @@
+[![<CircleCI>](https://circleci.com/gh/johnnynguyen541/webscraper-devops.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+
+
 # Web Scraper DevOps Project
 
-Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.  This is the 2nd iteration of the Udacity Capstone project seen at this link here: [Github johnnynguyen541/webscraper-cluster](https://github.com/johnnynguyen541/webscraper-cluster).  The main updates are:
+Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.  This is the 2nd iteration of the Capstone project seen at this link here: [Github johnnynguyen541/webscraper-cluster](https://github.com/johnnynguyen541/webscraper-cluster).  The main updates are:
+
 - Tech Debt Updates
 - Migration of tech to more modern tech
     - From AWS CloudFormation to Terraform
@@ -23,6 +27,7 @@ Technology         | Purpose
 AWS                | Cloud Provider
 Ansible            | IaC (Configuration Management)
 Bash/Linux         | Scripting Language/OS
+CircleCI           | CI/CD Build Tool
 Docker             | IaC (Containerization)
 Flask              | Python Web Framework for REST API
 Grafana            | Data Visualization Tool
@@ -40,6 +45,7 @@ Terraform          | IaC (Infrastructure Provisioning)
 Files/Folders      | Description
 ------------------ | ------------------
 `.ansible/`        | Ansible Playbooks for Infrastructure
+`.circleci/`       | CircleCI Config Script
 `.jenkins/`        | Jenkins Configs and Groovy Scripts
 `.tfinfra/`        | Terraform IaC Files
 `bash/`            | General Project Bash Scripts

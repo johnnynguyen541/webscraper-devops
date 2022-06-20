@@ -1,0 +1,176 @@
+---
+version: 2.1
+
+orbs:
+  github-super-linter: circleci/github-super-linter@1.0
+
+commands:
+  ubuntu-install-pip3:
+    description: "Install pip3 onto image"
+    steps:
+      - run:
+          name: Get Python3 Version
+          command: python3 --version
+      - run:
+          name: Update apt
+          command: sudo apt update
+      - run:
+          name: Install pip3
+          command: sudo apt install python3-pip
+      - run:
+          name: Get pip3 version
+          command: pip3 --version
+
+jobs:
+  lint-ansible:
+    description: |
+      Lint Ansible Playbooks under Project Path: .ansible/
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Ansible Linter
+          command: sudo make install-lint-ansible
+      - run:
+          name: Run Ansible Linter
+          command: sudo make lint-ansible
+
+  lint-bash:
+    description: |
+      Lint Bash shell scripts in entire project directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Bash Linter - Shell Check
+          command: sudo make install-lint-bash
+      - run:
+          name: Run Shell Check Linter
+          command: sudo make lint-bash
+
+  lint-circleci:
+    description: |
+      Lint CircleCI scripts in .circleci directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install CircleCI Linter - YAML Check
+          command: sudo make install-lint-circleci
+      - run:
+          name: Run YAML Check
+          command: sudo make lint-circleci
+
+  lint-docker:
+    description: |
+      Lint Dockerfiles in src/*/ directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Hadolint
+          command: sudo make install-lint-docker
+      - run:
+          name: Run Hadolint
+          command: sudo make lint-docker
+
+  lint-groovy:
+    description: |
+      Lint Groovy scripts in .jenkins directory
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Groovy Linter
+          command: sudo make install-lint-groovy
+      - run:
+          name: Run Groovy Linter
+          command: sudo make lint-groovy
+
+  lint-python:
+    description: |
+      Lint Python Code and Unit Tests
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Python Linter - Pycodestyle
+          command: sudo make install-lint-python
+      - run:
+          name: Run Pycodestyle
+          command: sudo make lint-python
+
+  lint-tflint:
+    description: |
+      Lint Terraform Code
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - run:
+          name: Install Terraform Linter - tflint
+          command: sudo make install-lint-tflint
+      - run:
+          name: Run tflint
+          command: sudo make lint-tflint
+
+  unit-test:
+    description: |
+      Unit Test Python Applications
+    docker:
+      - image: cimg/base:stable-20.04
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 20.10.11
+      - ubuntu-install-pip3
+      - run:
+          name: Install all Python Application Libraries
+          command: make install-app-scrape-api
+      - run:
+          name: Install all Python Unit Test Libraries
+          command: make install-test-unit
+      - run:
+          name: Run Python Application
+          command: | Update config.yml
+            ./run_docker.sh
+            cd ..
+            cd ..
+      - run:
+          name: Python Unit Tests
+          command: |
+            sleep 15
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
+            ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+
+workflows:
+  webscraper-devops-pipeline:
+    jobs:
+      ## - github-super-linter/lint
+      - lint-ansible
+      - lint-bash
+      - lint-circleci
+      - lint-docker
+      - lint-groovy
+      - lint-python
+      - lint-tflint
+      - unit-test:
+          requires:
+            - lint-ansible
+            - lint-bash
+            - lint-circleci
+            - lint-docker
+            - lint-groovy
+            - lint-python
+            - lint-tflint
+
+...

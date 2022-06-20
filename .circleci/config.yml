@@ -139,7 +139,7 @@ jobs:
           command: make install-test-unit
       - run:
           name: Run Python Application
-          command: | 
+          command: |
             cd src/scrape-api/
             ./run_docker.sh
             cd ..

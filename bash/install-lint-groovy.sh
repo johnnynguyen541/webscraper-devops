@@ -21,14 +21,18 @@ install_npm_groovy_lint() {
     if [[ $LINUX_DISTRO == 'Ubuntu'* ]]; then
         tput setaf 2; echo -e "Operating System: $LINUX_DISTRO"; tput sgr0
 
-        echo "Install Shell Check libraries for Ubuntu"
+        echo "Install Node.js Libraries for Ubuntu"
         xargs -a "$PROJECT_DIR_PATH"/lint/lint-groovy-ubuntu.txt apt install
+
+        echo "Install npm-groovy-lint"
         npm install -g npm-groovy-lint
     elif [[ $LINUX_DISTRO == 'Linuxmint'* ]]; then
         tput setaf 2; echo -e "Operating System: $LINUX_DISTRO"; tput sgr0
 
-        echo "Install Shell Check libraries for Linux Mint"
+        echo "Install Node.js Libraries for Linux Mint"
         xargs -a "$PROJECT_DIR_PATH"/lint/lint-groovy-linuxmint.txt apt install
+
+        echo "Install npm-groovy-lint"
         npm install -g npm-groovy-lint
     else
         tput setaf 1; echo "Sorry but this script only runs on Linux."; tput sgr0
@@ -50,5 +54,5 @@ test_npm_groovy_lint() {
     fi
 }
 
-install_shellcheck
-test_shellcheck
+install_npm_groovy_lint
+test_npm_groovy_lint

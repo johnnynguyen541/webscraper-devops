@@ -208,15 +208,15 @@ jobs:
     <<: *job-in-progress
 
 
-  test-integration:
-    <<: *job-in-progress
-
-
   scan-scrape-api:
     <<: *job-in-progress
 
 
   scan-scrape-bot:
+    <<: *job-in-progress
+
+
+  test-integration:
     <<: *job-in-progress
 
 
@@ -290,19 +290,31 @@ workflows:
             - lint-groovy
             - lint-python
             - lint-tflint
+      - scan-scrape-api:
+          context: slack-context
+          requires:
+            - lint-ansible
+            - lint-bash
+            - lint-circleci
+            - lint-docker
+            - lint-groovy
+            - lint-python
+            - lint-tflint
+      - scan-scrape-bot:
+          context: slack-context
+          requires:
+            - lint-ansible
+            - lint-bash
+            - lint-circleci
+            - lint-docker
+            - lint-groovy
+            - lint-python
+            - lint-tflint
       - test-integration:
           context: slack-context
           requires:
             - test-unit-scrape-bot
             - test-unit-scrape-api
-      - scan-scrape-api:
-          context: slack-context
-          requires:
-            - test-integration
-      - scan-scrape-bot:
-          context: slack-context
-          requires:
-            - test-integration
       - commit-docker:
           context: slack-context
           requires:

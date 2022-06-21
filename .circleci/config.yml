@@ -199,21 +199,21 @@ workflows:
     jobs:
       ## - github-super-linter/lint
       - lint-ansible:
-          context: slack-secrets
+          context: slack-context
       - lint-bash:
-          context: slack-secrets
+          context: slack-context
       - lint-circleci:
-          context: slack-secrets
+          context: slack-context
       - lint-docker:
-          context: slack-secrets
+          context: slack-context
       - lint-groovy:
-          context: slack-secrets
+          context: slack-context
       - lint-python:
-          context: slack-secrets
+          context: slack-context
       - lint-tflint:
-          context: slack-secrets
+          context: slack-context
       - unit-test:
-          context: slack-secrets
+          context: slack-context
           requires:
             - lint-ansible
             - lint-bash

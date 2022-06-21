@@ -318,8 +318,7 @@ workflows:
       - commit-docker:
           context: slack-context
           requires:
-            - scan-scrape-api
-            - scan-scrape-bot
+            - test-integration
           filters:
             branches:
               only:

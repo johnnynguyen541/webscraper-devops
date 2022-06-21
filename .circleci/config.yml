@@ -4,6 +4,15 @@ version: 2.1
 orbs:
   slack: circleci/slack@4.10.1
 
+anchors:
+  job-in-progress: &job-in-progress
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - run:
+          name: TODO Message
+          command: echo "Job is in progress"
+
 commands:
   ubuntu-install-pip3:
     description: "Install pip3 onto image"
@@ -154,7 +163,7 @@ jobs:
           template: basic_fail_1
 
 
-  unit-test:
+  test-unit-scrape-api:
     description: |
       Unit Test Python Applications
     docker:
@@ -194,6 +203,55 @@ jobs:
           event: pass
           template: basic_success_1
 
+
+  test-unit-scrape-bot:
+    <<: *job-in-progress
+
+
+  test-integration:
+    <<: *job-in-progress
+
+
+  scan-scrape-api:
+    <<: *job-in-progress
+
+
+  scan-scrape-bot:
+    <<: *job-in-progress
+
+
+  commit-docker:
+    <<: *job-in-progress
+
+
+  deploy-infrastructure:
+    <<: *job-in-progress
+
+
+  configure-infrastructure:
+    <<: *job-in-progress
+
+
+  run-migrations:
+    <<: *job-in-progress
+
+
+  deploy-scrape-api:
+    <<: *job-in-progress
+
+
+  deploy-scrape-bot:
+    <<: *job-in-progress
+
+
+  test-smoke:
+    <<: *job-in-progress
+
+
+  blue-green-switch:
+    <<: *job-in-progress
+
+
 workflows:
   webscraper-devops-pipeline:
     jobs:
@@ -212,7 +270,7 @@ workflows:
           context: slack-context
       - lint-tflint:
           context: slack-context
-      - unit-test:
+      - test-unit-scrape-api:
           context: slack-context
           requires:
             - lint-ansible
@@ -222,5 +280,66 @@ workflows:
             - lint-groovy
             - lint-python
             - lint-tflint
+      - test-unit-scrape-bot:
+          context: slack-context
+          requires:
+            - lint-ansible
+            - lint-bash
+            - lint-circleci
+            - lint-docker
+            - lint-groovy
+            - lint-python
+            - lint-tflint
+      - test-integration:
+          context: slack-context
+          requires:
+            - test-unit-scrape-bot
+            - test-unit-scrape-api
+      - scan-scrape-api:
+          context: slack-context
+          requires:
+            - test-integration
+      - scan-scrape-bot:
+          context: slack-context
+          requires:
+            - test-integration
+      - commit-docker:
+          context: slack-context
+          requires:
+            - scan-scrape-api
+            - scan-scrape-bot
+          filters:
+            branches:
+              only:
+                - main
+      - deploy-infrastructure:
+          context: slack-context
+          requires:
+            - commit-docker
+      - configure-infrastructure:
+          context: slack-context
+          requires:
+            - deploy-infrastructure
+      - run-migrations:
+          context: slack-context
+          requires:
+            - configure-infrastructure
+      - deploy-scrape-api:
+          context: slack-context
+          requires:
+            - run-migrations
+      - deploy-scrape-bot:
+          context: slack-context
+          requires:
+            - run-migrations
+      - test-smoke:
+          context: slack-context
+          requires:
+            - deploy-scrape-api
+            - deploy-scrape-bot
+      - blue-green-switch:
+          context: slack-context
+          requires:
+            - test-smoke
 
 ...

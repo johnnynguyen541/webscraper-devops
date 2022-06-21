@@ -5,17 +5,29 @@
 Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.  This is the 2nd iteration of the Capstone project seen at this link here: [Github johnnynguyen541/webscraper-cluster](https://github.com/johnnynguyen541/webscraper-cluster).  The main updates are:
 
 - Tech Debt Updates
+    - Refactor Ansible Playbooks and Terraform Code
+    - Update New CircleCI Pipeline
 - Migration of tech to more modern tech
     - From AWS CloudFormation to Terraform
-    - From CircleCI to Jenkins
+    - From CircleCI to CircleCI+Jenkins
+    - Using Amazon EKS
 - Adding New Tech to full pipeline for observability and other purposes
     - Grafana
-    - New Relic
     - Prometheus
-    - Splunk
 - Expanding the functionality
     - Updating code to have an `API service` and a `bot service`
-    - Also use an RDS Cluster
+    - Store Data in RDS
+- Long term Enhancements
+    - Helm (Kubernetes application management)
+    - Ansible Tower (Pull Config)
+    - Splunk (Logging)
+    - New Relic (APM)
+    - Vault (Secrets Management)
+    - Packer (AMI builds)
+    - GCP/Azure support? (Clouds)
+    - More services for cluster/test RDS cluster
+    - Config file for Python Devices
+    - Swagger API/Authentification
 
 See [Project Overview](docs/project-overview.md) for more specific info.
 
@@ -71,6 +83,10 @@ Python App Files   | Description
 ## Pipeline
 
 ![Blue/Green Deployment](docs/pipeline.png)
+
+### CircleCI Pipeline
+
+![CircleCI Pipeline](docs/circleci-pipeline.png)
 
 ## How To Run
 

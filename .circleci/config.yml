@@ -315,6 +315,8 @@ workflows:
           requires:
             - test-unit-scrape-bot
             - test-unit-scrape-api
+            - scan-scrape-bot
+            - scan-scrape-api
       - commit-docker:
           context: slack-context
           requires:

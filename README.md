@@ -1,6 +1,5 @@
 [![<CircleCI>](https://circleci.com/gh/johnnynguyen541/webscraper-devops.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 
-
 # Web Scraper DevOps Project
 
 Web scraper microservice cluster with full CI/CD pipeline using common industry DevOps tools.  This is the 2nd iteration of the Capstone project seen at this link here: [Github johnnynguyen541/webscraper-cluster](https://github.com/johnnynguyen541/webscraper-cluster).  The main updates are:
@@ -55,34 +54,24 @@ Files/Folders      | Description
 `src/`             | Project Apps - `scrape-api` - `scrape-bot`
 `tests/`           | Unit Tests
 `LICENSE.md`       | License for Project
+`.gitignore`       | GIT ignore files
+`.secrets.txt`     | Secrets file used (Currently managed by CircleCI, in .gitignore)
 `Makefile`         | Makefile: setup, install, test, lint, and all
 `README.md`        | Project README file
 
 Python App Files   | Description
 ------------------ | ------------------
+`../config.yml`    | Config files used for applications.
 `app/`             | Python Application Files
 `Dockerfile`       | Docker Build File
 `requirements.txt` | Python Library requirements file
+`run_docker.sh`    | Run Docker Container
+`upload_docker.sh` | Upload Docker Container to Docker Registrt
 
 ## Pipeline
 
 ![Blue/Green Deployment](docs/pipeline.png)
 
 ## How To Run
-
-### Install Linux
-
-You must also install the Linux Packages in packages.txt.  Run the following in sudo:
-
-`xargs -a lint/debian-packages.txt apt install`
-
-### Install Hadolint
-
-To install Hadolint
-
-```shell
-sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
-sudo chmod +x /bin/hadolint
-```
 
 TBD

@@ -1,8 +1,8 @@
 ---
 version: 2.1
 
-orbs:
-  github-super-linter: circleci/github-super-linter@1.0
+orbs: 
+  slack: circleci/slack@4.10.1
 
 commands:
   ubuntu-install-pip3:
@@ -35,6 +35,10 @@ jobs:
       - run:
           name: Run Ansible Linter
           command: sudo make lint-ansible
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
 
   lint-bash:
     description: |
@@ -49,6 +53,11 @@ jobs:
       - run:
           name: Run Shell Check Linter
           command: sudo make lint-bash
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+
 
   lint-circleci:
     description: |
@@ -63,6 +72,11 @@ jobs:
       - run:
           name: Run YAML Check
           command: sudo make lint-circleci
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+
 
   lint-docker:
     description: |
@@ -77,6 +91,11 @@ jobs:
       - run:
           name: Run Hadolint
           command: sudo make lint-docker
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+
 
   lint-groovy:
     description: |
@@ -91,6 +110,11 @@ jobs:
       - run:
           name: Run Groovy Linter
           command: sudo make lint-groovy
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+
 
   lint-python:
     description: |
@@ -105,6 +129,11 @@ jobs:
       - run:
           name: Run Pycodestyle
           command: sudo make lint-python
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+
 
   lint-tflint:
     description: |
@@ -119,6 +148,11 @@ jobs:
       - run:
           name: Run tflint
           command: sudo make lint-tflint
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+
 
   unit-test:
     description: |
@@ -152,19 +186,34 @@ jobs:
             ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
             ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
             ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+      - slack/notify:
+          event: fail
+          mentions: '@johnnynguyen541'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: basic_success_1
 
 workflows:
   webscraper-devops-pipeline:
     jobs:
       ## - github-super-linter/lint
-      - lint-ansible
-      - lint-bash
-      - lint-circleci
-      - lint-docker
-      - lint-groovy
-      - lint-python
-      - lint-tflint
+      - lint-ansible:
+          context: slack-secrets
+      - lint-bash:
+          context: slack-secrets
+      - lint-circleci:
+          context: slack-secrets
+      - lint-docker:
+          context: slack-secrets
+      - lint-groovy:
+          context: slack-secrets
+      - lint-python:
+          context: slack-secrets
+      - lint-tflint:
+          context: slack-secrets
       - unit-test:
+          context: slack-secrets
           requires:
             - lint-ansible
             - lint-bash

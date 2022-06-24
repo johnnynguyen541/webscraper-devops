@@ -166,4 +166,4 @@ dmypy.json
 # Other #
 #########
 # CircleCI Secrets
-.secrets.txt
+.secrets.yml

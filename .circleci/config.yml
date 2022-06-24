@@ -46,7 +46,7 @@ jobs:
           command: sudo make lint-ansible
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
   lint-bash:
@@ -64,7 +64,7 @@ jobs:
           command: sudo make lint-bash
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
 
@@ -83,7 +83,7 @@ jobs:
           command: sudo make lint-circleci
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
 
@@ -102,7 +102,7 @@ jobs:
           command: sudo make lint-docker
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
 
@@ -121,7 +121,7 @@ jobs:
           command: sudo make lint-groovy
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
 
@@ -140,7 +140,7 @@ jobs:
           command: sudo make lint-python
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
 
@@ -159,7 +159,7 @@ jobs:
           command: sudo make lint-tflint
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
 
 
@@ -197,7 +197,7 @@ jobs:
             ssh remote-docker \ curl --fail 127.0.0.1:5001/health
       - slack/notify:
           event: fail
-          mentions: '@johnnynguyen541'
+          mentions: '@Johnny'
           template: basic_fail_1
       - slack/notify:
           event: pass

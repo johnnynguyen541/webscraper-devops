@@ -75,9 +75,10 @@ install-app-all:
 	install-app-scrape-rds
 
 install-all:
-	echo "TODO"
+	echo "Install all Libraries"
 	install-lint-all
 	install-app-all
+	install-test-unit
 
 ###################
 # Makefile - Lint #
@@ -117,6 +118,7 @@ lint-tflint:
 	find .tfinfra/services/*/*/main.tf | xargs -L1 tflint
 
 lint-all:
+	echo "Linting all files"
 	lint-ansible
 	lint-bash
 	lint-circleci
@@ -125,7 +127,9 @@ lint-all:
 	lint-python
 	lint-tflint
 
-# Makefile - Test
+###################
+# Makefile - Test #
+###################
 
 test-unit:
 	echo "Python Unit Tests"

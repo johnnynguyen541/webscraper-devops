@@ -11,9 +11,12 @@
 
 # Variables
 INSTALL_CFG_PATH="$(dirname "$(readlink -f "$0")")/cfg/install.cfg"
+INSTALL_LIB_PATH="$(dirname "$(readlink -f "$0")")/cfg/install-library.sh"
 
 # shellcheck source=/dev/null
 . "${INSTALL_CFG_PATH}"
+# shellcheck source=/dev/null
+. "${INSTALL_LIB_PATH}"
 
 install_npm_groovy_lint() {
     echo "$(date): Checking Linux Distribution "
@@ -42,17 +45,5 @@ install_npm_groovy_lint() {
     fi
 }
 
-test_npm_groovy_lint() {
-    echo "$(date): Testing $GROOVY_CMD"
-
-    if ! command -v "$GROOVY_CMD" &> /dev/null
-    then
-        echo "$GROOVY_CMD command could not be found"
-        exit 1
-    else
-        echo "$GROOVY_CMD command found"
-    fi
-}
-
 install_npm_groovy_lint
-test_npm_groovy_lint
+test_command "$GROOVY_CMD"

@@ -11,9 +11,12 @@
 
 # Variables
 INSTALL_CFG_PATH="$(dirname "$(readlink -f "$0")")/cfg/install.cfg"
+INSTALL_LIB_PATH="$(dirname "$(readlink -f "$0")")/cfg/install-library.sh"
 
 # shellcheck source=/dev/null
 . "${INSTALL_CFG_PATH}"
+# shellcheck source=/dev/null
+. "${INSTALL_LIB_PATH}"
 
 install_hadolint() {
     echo "Run wget"
@@ -32,17 +35,5 @@ install_hadolint() {
     fi
 }
 
-test_hadolint() {
-    echo "$(date): Testing $HADOLINT_CMD"
-
-    if ! command -v "$HADOLINT_CMD" &> /dev/null
-    then
-        echo "$HADOLINT_CMD command could not be found"
-        exit 1
-    else
-        echo "$HADOLINT_CMD command found"
-    fi
-}
-
 install_hadolint
-test_hadolint
+test_command "$HADOLINT_CMD"

@@ -41,20 +41,6 @@ install-lint-tflint:
 	echo "Install Terraform Linter: tflint"
 	./bash/install-lint-tflint.sh
 
- # OTHER INSTALLS
-install-app-scrape-api:
-	echo "Install Scrape API library"
-	pip3 install --upgrade pip &&\
-		pip3 install -r src/scrape-api/requirements.txt
-
-install-test-unit:
-	echo "Install Unit Test Libraries"
-	pip3 install --upgrade pip &&\
-		pip3 install -r tests/requirements.txt
-
-install-all:
-	echo "TODO"
-
 install-lint-all:
 	install-lint-ansible
 	install-lint-bash
@@ -63,6 +49,36 @@ install-lint-all:
 	install-lint-groovy
 	install-lint-python
 	install-lint-tflint
+
+ # OTHER INSTALLS
+install-app-scrape-api:
+	echo "Install Scrape API"
+	pip3 install --upgrade pip &&\
+		pip3 install -r src/scrape-api/requirements.txt
+
+install-app-scrape-bot:
+	echo "Install Scrape Bot"
+	echo "TODO"
+
+install-app-scrape-rds:
+	echo "Install Scrape RDS"
+	echo "TODO"
+
+install-test-unit:
+	echo "Install Unit Test Libraries"
+	pip3 install --upgrade pip &&\
+		pip3 install -r tests/requirements.txt
+
+install-app-all:
+	install-app-scrape-api
+	install-app-scrape-bot
+	install-app-scrape-rds
+
+install-all:
+	echo "Install all Libraries"
+	install-lint-all
+	install-app-all
+	install-test-unit
 
 ###################
 # Makefile - Lint #
@@ -102,6 +118,7 @@ lint-tflint:
 	find .tfinfra/services/*/*/main.tf | xargs -L1 tflint
 
 lint-all:
+	echo "Linting all files"
 	lint-ansible
 	lint-bash
 	lint-circleci
@@ -110,11 +127,17 @@ lint-all:
 	lint-python
 	lint-tflint
 
-# Makefile - Test
+###################
+# Makefile - Test #
+###################
 
 test-unit:
 	echo "Python Unit Tests"
-	python3 -m unittest tests/test_unit.py 
+	python3 -m unittest tests/test_unit.py
+
+test-integration:
+	echo "Python Unit Tests"
+	python3 -m unittest tests/test_integration.py 
 
 test-smoke:
 	echo "Python Smoke Tests"

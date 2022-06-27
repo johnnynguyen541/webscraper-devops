@@ -11,9 +11,12 @@
 
 # Variables
 INSTALL_CFG_PATH="$(dirname "$(readlink -f "$0")")/cfg/install.cfg"
+INSTALL_LIB_PATH="$(dirname "$(readlink -f "$0")")/cfg/install-library.sh"
 
 # shellcheck source=/dev/null
 . "${INSTALL_CFG_PATH}"
+# shellcheck source=/dev/null
+. "${INSTALL_LIB_PATH}"
 
 install_tflint() {
     echo "Run curl"
@@ -21,17 +24,5 @@ install_tflint() {
     curl -s "$TFLINT_URL" | bash
 }
 
-test_tflint() {
-    echo "$(date): Testing $TFLINT_CMD"
-
-    if ! command -v "$TFLINT_CMD" &> /dev/null
-    then
-        echo "$TFLINT_CMD command could not be found"
-        exit 1
-    else
-        echo "$TFLINT_CMD command found"
-    fi
-}
-
 install_tflint
-test_tflint
+test_command "$TFLINT_CMD"

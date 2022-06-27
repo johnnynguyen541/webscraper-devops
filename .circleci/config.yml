@@ -29,6 +29,13 @@ commands:
       - run:
           name: Get pip3 version
           command: pip3 --version
+  slack-fail-notification:
+    description: "Slack Failure Notification"
+    steps:
+      - slack/notify:
+          event: fail
+          mentions: '@Johnny'
+          template: basic_fail_1
 
 jobs:
   lint-ansible:
@@ -44,10 +51,7 @@ jobs:
       - run:
           name: Run Ansible Linter
           command: sudo make lint-ansible
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
   lint-bash:
     description: |
@@ -62,10 +66,7 @@ jobs:
       - run:
           name: Run Shell Check Linter
           command: sudo make lint-bash
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
 
   lint-circleci:
@@ -81,10 +82,7 @@ jobs:
       - run:
           name: Run YAML Check
           command: sudo make lint-circleci
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
 
   lint-docker:
@@ -100,10 +98,7 @@ jobs:
       - run:
           name: Run Hadolint
           command: sudo make lint-docker
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
 
   lint-groovy:
@@ -119,10 +114,7 @@ jobs:
       - run:
           name: Run Groovy Linter
           command: sudo make lint-groovy
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
 
   lint-python:
@@ -138,10 +130,7 @@ jobs:
       - run:
           name: Run Pycodestyle
           command: sudo make lint-python
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
 
   lint-tflint:
@@ -157,10 +146,7 @@ jobs:
       - run:
           name: Run tflint
           command: sudo make lint-tflint
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
+      - slack-fail-notification
 
 
   test-unit-scrape-api:
@@ -195,13 +181,7 @@ jobs:
             ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
             ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
             ssh remote-docker \ curl --fail 127.0.0.1:5001/health
-      - slack/notify:
-          event: fail
-          mentions: '@Johnny'
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: basic_success_1
+      - slack-fail-notification
 
 
   test-unit-scrape-bot:
@@ -249,7 +229,15 @@ jobs:
 
 
   blue-green-switch:
-    <<: *job-in-progress
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - run:
+          name: TODO Message
+          command: echo "Job is in progress"
+      - slack/notify:
+          event: pass
+          template: basic_success_1
 
 
 workflows:

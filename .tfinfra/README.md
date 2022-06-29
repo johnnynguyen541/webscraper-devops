@@ -7,7 +7,6 @@
 4. [Services](#Services)
 5. [Commands](#Commands)
 6. [Naming Conventions](#Naming-Conventions)
-7. [TODO](#TODO)
 
 ### Setup
 
@@ -28,10 +27,9 @@ There are 2 main environments: `dev` and `prod`.
     - `core` -> Core Infrastructure
     - `main` -> Main Environment
   - `prod/`
-    - `blue`  -> Blue Environment
-    - `core`  -> Core Infrastructure
-    - `green` -> Green Environment
-- All environments have `core` resources for each environment (ie network, security groups).
+    - `core` -> Core Infrastructure
+    - `main` -> Main Environment
+- All environments have `core` resources for each environment (ie network, security groups, iam roles).
   - Sub-environments all use `core` components.  This means they could use the same VPC, Subnets, etc.
 - Each sub environment has `$FEATURE/` directory corresponding to a service/set of services (general or core).
 
@@ -73,12 +71,13 @@ Each **Resource** should have the following tags:
 
 Tag Name     | Description      | Convention                                      | Example
 -------------|------------------|-------------------------------------------------| ----
-Name         | Name of Resource | `${env}-${subenv}-${project}-${role}-${resource}` | `dev-core-up3-bastion-sg`
-Account      | Account Name     | `${account_tag}`                                  | `johnny.aws`
-Environment  | Environment Name | `${env_tag}-${subenv_tag}`                        | `dev-main`
-Project      | Project Name     | `${project_tag}`                                  | `up3`
-Resource     | Resource Type    | `${resource_tag}`                                 | `ec2`, `alb`, `sg`, `asg`
-Role         | Resource Role    | `${role_tag}`                                     | `bastion`, `webserver`, `api`, `mysql`
+Name         | Name of Resource | `${env}-${subenv}-${project}-${role}-${resource}` | `dev-core-webscraper-infra-vpc`
+Commit       | Git Commit SHA   | `$(git rev-parse --short HEAD)` | `7ef9d38`
+Account      | Account Name     | `${account_tag}`                                  | `johnny_aws`
+Environment  | Environment Name | `${env_tag}-${subenv_tag}`                        | `dev-core`
+Project      | Project Name     | `${project_tag}`                                  | `webscraper`
+Resource     | Resource Type    | `${resource_tag}`                                 | `ec2`, `alb`, `sg`, `asg`, `vpc`
+Role         | Resource Role    | `${role_tag}`                                     | `bastion`, `webserver`, `api`, `mysql`, `infra`
 
 ### Modules
 Modular Resources, meant to be either a single wrapper of resources (or very small clusters).
@@ -128,23 +127,3 @@ strings                       | dash-case
 files                         | snake_case
 resources, variables, modules | snake_case
 comments, placeholders        | CAPS_CASE
-
-### TODO
-1. alias commands - `terraform-alias.sh`.  Save off to Bash profile
-2. move core/services around
-3. move role tags to sub-envs?
-4. s3 bucket - 1 bucket? 
-   1. make `role/bootstrap`
-5. Auto Linter - In Python Unit Test 
-6. `bootstrap.sh.tftpl`
-   1. Uses env, subenv, role?
-7. cloud-init.tftpl
-   1. List of things to install?
-8. namespacing
-    - tags
-    - env-sub_env
-9. Link README.md
-10. Template/Structure 
-11. Enable Creating Key-Pair logic/List for Subnets and AZs
-    1. Reference for # of nets.
-    2. Refactor to Arrays from individual variables

@@ -12,7 +12,7 @@
 
 Folder | Description
 ---- | ----
-**env** | Environments Deployed
+**environments** | Environments Deployed
 **modules** | Modular "Classes"
 **services** | Services used
 **templates** | Templates for the 3 above for reference

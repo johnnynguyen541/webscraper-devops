@@ -1,0 +1,2 @@
+# VARIABLE DEFINITIONS/OVERRIDES AT FEATURE LEVEL
+enable_elastic_ips  = true

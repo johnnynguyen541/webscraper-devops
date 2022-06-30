@@ -37,6 +37,7 @@ resource "aws_security_group" "bastion_server" {
   tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.bastion_tag]}-${local.sg_resource_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.sg_resource_tag
@@ -44,7 +45,7 @@ resource "aws_security_group" "bastion_server" {
   }
 }
 
-# SSH
+# SANDBOX
 resource "aws_security_group" "sandbox_server" {
   # REQUIRED VARIABLES
   description        = "Completely Open Resource"
@@ -82,6 +83,7 @@ resource "aws_security_group" "sandbox_server" {
   tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.sandbox_tag]}-${local.sg_resource_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.sg_resource_tag
@@ -120,6 +122,7 @@ resource "aws_security_group" "ssh_server" {
   tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.ssh_tag]}-${local.sg_resource_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.sg_resource_tag

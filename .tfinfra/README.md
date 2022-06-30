@@ -127,3 +127,4 @@ strings                       | dash-case
 files                         | snake_case
 resources, variables, modules | snake_case
 comments, placeholders        | CAPS_CASE
+sub tags, subnames            | dot.case

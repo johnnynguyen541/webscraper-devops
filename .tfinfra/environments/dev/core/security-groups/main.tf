@@ -9,6 +9,7 @@ module "security_groups" {
 
   # TAGS
   account_tag     = var.account_tag
+  commit_tag      = var.commit_tag
   env_tag         = var.env_tag
   project_tag     = var.project_tag
   role_tags       = var.role_tags

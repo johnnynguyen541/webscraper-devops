@@ -38,6 +38,11 @@ variable "account_tag" {
   type        = string  # string, number, bool, list, map
 }
 
+variable "commit_tag" {
+  description = "Tag - GIT Commit ID Name"
+  type        = string  # string, number, bool, list, map
+}
+
 variable "env_tag" {
   description = "Tag - Environment Name"
   type        = string  # string, number, bool, list, map

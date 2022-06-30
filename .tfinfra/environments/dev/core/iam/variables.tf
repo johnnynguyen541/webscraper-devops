@@ -3,19 +3,18 @@
 # LOCAL
 locals {
   # ROLE TAGS
-  core_server     = "core_server"
-  prometheus      = "prometheus"
+  core_server = "core_server"
+  prometheus  = "prometheus"
+
+  iam_instance_tag    = "iam_instance_tag"
+  iam_role_tag        = "iam_role_tag"
+  iam_role_policy_tag = "iam_role_policy_tag"
+  iam_user_tag        = "iam_user_tag"
 }
 
 # ENV
 variable "region" {
   description = "AWS Region Hosted"
-  type        = string
-}
-
-# FEATURE
-variable "prometheus_iam_user_name" {
-  description = "Prometheus IAM User name"
   type        = string
 }
 
@@ -25,28 +24,13 @@ variable "account_tag" {
   type        = string  # string, number, bool, list, map
 }
 
+variable "commit_tag" {
+  description = "Tag - GIT Commit ID Name"
+  type        = string  # string, number, bool, list, map
+}
+
 variable "env_tag" {
   description = "Tag - Environment Name"
-  type        = string  # string, number, bool, list, map
-}
-
-variable "iam_instance_tag" {
-  description = "Tag - IAM Instance"
-  type        = string  # string, number, bool, list, map
-}
-
-variable "iam_role_tag" {
-  description = "Tag - IAM Role"
-  type        = string  # string, number, bool, list, map
-}
-
-variable "iam_role_policy_tag" {
-  description = "Tag - IAM Role Policy"
-  type        = string  # string, number, bool, list, map
-}
-
-variable "iam_user_tag" {
-  description = "Tag - IAM User"
   type        = string  # string, number, bool, list, map
 }
 

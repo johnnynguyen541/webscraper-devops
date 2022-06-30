@@ -18,7 +18,7 @@ region              = "us-west-2"
 s3_bucket_name      = "webscraper-infrastructure"
 
 # Tags
-account_tag         = "johnny.aws"
+account_tag         = "johnny_aws"
 env_tag             = "dev"
 project_tag         = "webscraper"
 vpc_cidr            = "10.0.0.0/16"
@@ -78,6 +78,12 @@ role_tags = {
   sandbox     = "sandbox",
   core_server = "core_server", # Core IAM Group
   prometheus  = "prometheus",  # Prometheus User
+
+  iam_instance_tag         = "iam_profile"
+  iam_role_tag             = "iam_role"
+  iam_role_policy_tag      = "iam_policy"
+  iam_user_tag             = "iam_user"
+  iam_prometheus_user_tag  = "prometheus"
 
   # MAIN
   s_master    = "s_master",

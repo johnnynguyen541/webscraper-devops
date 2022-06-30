@@ -73,7 +73,7 @@ Tag Name     | Description      | Convention                                    
 -------------|------------------|-------------------------------------------------| ----
 Name         | Name of Resource | `${env}-${subenv}-${project}-${role}-${resource}` | `dev-core-webscraper-infra-vpc`
 Commit       | Git Commit SHA   | `$(git rev-parse --short HEAD)` | `7ef9d38`
-Account      | Account Name     | `${account_tag}`                                  | `johnny.aws`
+Account      | Account Name     | `${account_tag}`                                  | `johnny_aws`
 Environment  | Environment Name | `${env_tag}-${subenv_tag}`                        | `dev-core`
 Project      | Project Name     | `${project_tag}`                                  | `webscraper`
 Resource     | Resource Type    | `${resource_tag}`                                 | `ec2`, `alb`, `sg`, `asg`, `vpc`
@@ -126,5 +126,5 @@ folders                       | dash-case
 strings                       | dash-case
 files                         | snake_case
 resources, variables, modules | snake_case
+sub tags, subnames            | snake_case
 comments, placeholders        | CAPS_CASE
-sub tags, subnames            | dot.case

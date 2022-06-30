@@ -12,6 +12,7 @@ module "iam" {
   iam_instance_tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.core_server]}-${var.iam_instance_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = var.iam_instance_tag
@@ -21,6 +22,7 @@ module "iam" {
   iam_role_tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.core_server]}-${var.iam_role_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = var.iam_role_tag
@@ -32,13 +34,14 @@ module "prometheus" {
   source          = "../../../../modules/iam-user"
 
   # REQUIRED VARIABLES
-  user_name   = var.prometheus_iam_user_name
-  policy_name = var.prometheus_iam_user_name
+  user_name   = var.iam_prometheus_user_tag
+  policy_name = var.iam_prometheus_user_tag
 
   # TAGS
   user_tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.prometheus]}-${var.iam_instance_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = var.iam_user_tag

@@ -18,7 +18,7 @@ region              = "us-west-2"
 s3_bucket_name      = "webscraper-infrastructure"
 
 # Tags
-account_tag         = "johnny_aws"
+account_tag         = "johnny.aws"
 env_tag             = "dev"
 project_tag         = "webscraper"
 vpc_cidr            = "10.0.0.0/16"

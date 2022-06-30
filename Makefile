@@ -113,7 +113,7 @@ lint-python:
 
 lint-tflint:
 	echo "Terraform Linter: tflint"
-	find .tfinfra/env/*/*/*/main.tf | xargs -L1 tflint
+	find .tfinfra/environments/*/*/*/main.tf | xargs -L1 tflint
 	find .tfinfra/modules/*/main.tf | xargs -L1 tflint
 	find .tfinfra/services/*/*/main.tf | xargs -L1 tflint
 

@@ -1,38 +1,24 @@
 # VARIABLES DECLARED
 
-###################
-# LOCAL VARIABLES #
-###################
+# LOCAL
 locals {
   # ROLE TAGS
-  bastion_tag     = "bastion"
-  sandbox_tag     = "sandbox"
-  ssh_tag         = "ssh"
-  # RESOURCE TAGS
-  sg_resource_tag = "sg"
+  core_server = "core_server"
+  prometheus  = "prometheus"
+
+  iam_instance_tag    = "iam_instance_tag"
+  iam_role_tag        = "iam_role_tag"
+  iam_role_policy_tag = "iam_role_policy_tag"
+  iam_user_tag        = "iam_user_tag"
 }
 
-######################
-# REQUIRED VARIABLES #
-######################
-variable "private_subnets" {
-  description = "List of all private subnets"
-  type        = list(string)
-}
-
-variable "public_subnets" {
-  description = "List of all public subnets"
-  type        = list(string)
-}
-
-variable "vpc_id" {
+# ENV
+variable "region" {
   description = "AWS Region Hosted"
   type        = string
 }
 
-########
-# TAGS #
-########
+# TAGS
 variable "account_tag" {
   description = "Tag - Account Name"
   type        = string  # string, number, bool, list, map
@@ -54,7 +40,7 @@ variable "project_tag" {
 }
 
 variable "role_tags" {
-  description = "Tag - Resource Roles"
+  description = "Tag - Resource Role"
   type        = map(string)  # string, number, bool, list, map
 }
 

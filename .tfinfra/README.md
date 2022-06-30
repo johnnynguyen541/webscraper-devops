@@ -12,7 +12,7 @@
 
 Folder | Description
 ---- | ----
-**env** | Environments Deployed
+**environments** | Environments Deployed
 **modules** | Modular "Classes"
 **services** | Services used
 **templates** | Templates for the 3 above for reference
@@ -72,12 +72,53 @@ Each **Resource** should have the following tags:
 Tag Name     | Description      | Convention                                      | Example
 -------------|------------------|-------------------------------------------------| ----
 Name         | Name of Resource | `${env}-${subenv}-${project}-${role}-${resource}` | `dev-core-webscraper-infra-vpc`
-Commit       | Git Commit SHA   | `$(git rev-parse --short HEAD)` | `7ef9d38`
 Account      | Account Name     | `${account_tag}`                                  | `johnny_aws`
+Commit       | Git Commit SHA   | `$(git rev-parse --short HEAD)` | `7ef9d38`
 Environment  | Environment Name | `${env_tag}-${subenv_tag}`                        | `dev-core`
 Project      | Project Name     | `${project_tag}`                                  | `webscraper`
 Resource     | Resource Type    | `${resource_tag}`                                 | `ec2`, `alb`, `sg`, `asg`, `vpc`
 Role         | Resource Role    | `${role_tag}`                                     | `bastion`, `webserver`, `api`, `mysql`, `infra`
+
+These Tags are explicitly defined when using modules.  However, when using a module in `services/` directory, it should create the tags for you (which of course could reference `modules` in itself).  For example:
+
+```HCL
+# IAM MODULE CALL
+module "iam" {
+  source          = "../../../../modules/iam-ec2"
+
+  # TAGS
+  iam_instance_tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.core_server]}-${var.iam_instance_tag}"
+    Account     = var.account_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = var.iam_instance_tag
+    Role        = var.role_tags[local.core_server]
+  }
+
+  iam_role_tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.core_server]}-${var.iam_role_tag}"
+    Account     = var.account_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = var.iam_role_tag
+    Role        = var.role_tags[local.core_server]
+  }
+}
+
+# SG MODULE CALL
+module "security_groups" {
+  source          = "../../../../services/core/security-groups"
+
+  # TAGS
+  account_tag     = var.account_tag
+  commit_tag      = var.commit_tag
+  env_tag         = var.env_tag
+  project_tag     = var.project_tag
+  role_tags       = var.role_tags
+  subenv_tag      = var.subenv_tag
+}
+```
 
 ### Modules
 Modular Resources, meant to be either a single wrapper of resources (or very small clusters).
@@ -126,4 +167,5 @@ folders                       | dash-case
 strings                       | dash-case
 files                         | snake_case
 resources, variables, modules | snake_case
+sub tags, subnames            | snake_case
 comments, placeholders        | CAPS_CASE

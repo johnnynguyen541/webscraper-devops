@@ -100,7 +100,7 @@ TBD
 - [ ] [Create Python Scrape Bot - Phase #2](https://github.com/johnnynguyen541/webscraper-devops/issues/6)
 - [ ] [Update pipeline.png and pipeline.drawio](https://github.com/johnnynguyen541/webscraper-devops/issues/7)
 - [ ] [Create Scan/Security Tests](https://github.com/johnnynguyen541/webscraper-devops/issues/8)
-- [ ] [Update Infrastructure for Terraform Phase 1](https://github.com/johnnynguyen541/webscraper-devops/issues/9)
+- [x] [Update Infrastructure for Terraform Phase 1](https://github.com/johnnynguyen541/webscraper-devops/issues/9)
 - [ ] [Update Infrastructure for Terraform Phase 2](https://github.com/johnnynguyen541/webscraper-devops/issues/10)
 - [ ] [Update Infrastructure for Terraform Phase 3](https://github.com/johnnynguyen541/webscraper-devops/issues/11)
 - [ ] [CD Deployment Phase 1](https://github.com/johnnynguyen541/webscraper-devops/issues/12)

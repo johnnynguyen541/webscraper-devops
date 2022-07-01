@@ -21,6 +21,7 @@ with open(APP_CFG_PATH, "r") as f:
 API_IP = APP_CFG["scrape-api"]["ip"]
 API_PORT = APP_CFG["scrape-api"]["port"]
 API_HEALTH_URL = f"http://{API_IP}:{API_PORT}"
+
 BOT_IP = APP_CFG["scrape-bot"]["ip"]
 BOT_PORT = APP_CFG["scrape-bot"]["port"]
 BOT_HEALTH_URL = f"http://{BOT_IP}:{BOT_PORT}"

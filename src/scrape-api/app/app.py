@@ -9,9 +9,7 @@ import yaml
 # Config Paths
 APP_DIR = path.dirname(path.realpath(__file__))
 SRC_DIR = path.dirname(APP_DIR)
-PROJ_DIR = path.dirname(SRC_DIR)
-MAIN_DIR = path.dirname(PROJ_DIR)
-APP_CFG_PATH = path.join(MAIN_DIR, "config", "app.yml")
+APP_CFG_PATH = path.join(SRC_DIR, "cfg", "app.yml")
 APP_CFG = {}
 
 # Read config files

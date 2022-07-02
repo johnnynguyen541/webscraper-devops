@@ -1,0 +1,10 @@
+---
+scrape-api:
+  health-endpoint: "/health"
+  ip: 127.0.0.1
+  port: 5001
+scrape-bot:
+  health-endpoint: "/health"
+  ip: 127.0.0.1
+  port: 5002
+...

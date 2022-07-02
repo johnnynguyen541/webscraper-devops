@@ -7,9 +7,7 @@ import yaml
 # Config Paths
 APP_DIR = path.dirname(path.realpath(__file__))
 SRC_DIR = path.dirname(APP_DIR)
-PROJ_DIR = path.dirname(SRC_DIR)
-MAIN_DIR = path.dirname(PROJ_DIR)
-APP_CFG_PATH = path.join(MAIN_DIR, "config", "app.yml")
+APP_CFG_PATH = path.join(SRC_DIR, "cfg", "app.yml")
 APP_CFG = {}
 
 # Read config files
@@ -46,4 +44,4 @@ class Health(Resource):
 api.add_resource(Health, '/', '/health')
 
 if __name__ == '__main__':
-    app.run(debug=True, host=API_IP, port=BOT_PORT)
+    app.run(debug=True, host='0.0.0.0', port=BOT_PORT)

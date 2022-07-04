@@ -75,7 +75,13 @@ jobs:
     docker:
       - image: cimg/base:current-22.04
     steps:
-      - checkoutUpdate run_docker.sh, upload_docker.sh, and 2 more files...
+      - checkout
+      - run:
+          name: Install CircleCI Linter - YAML Check
+          command: sudo make install-lint-circleci
+      - run:
+          name: Run YAML Check
+          command: sudo make lint-circleci
       - slack-fail-notification
 
 

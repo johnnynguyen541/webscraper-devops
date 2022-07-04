@@ -25,7 +25,7 @@ docker network create --subnet="$DOCKER_SUBNET" "$DOCKER_NETWORK"
 
 # Step 4: 
 # Run flask app - Print if successful
-if BUILD_NUMBER=$(docker run --detach --publish $API_PORT:$API_PORT --net $DOCKER_NETWORK --ip $API_IP $TAG_API_ID:$TAG_API_VERSION)
+if BUILD_NUMBER=$(docker run --detach --publish "$API_PORT":"$API_PORT" --net "$DOCKER_NETWORK" --ip "$API_IP" "$TAG_API_ID":"$TAG_API_VERSION")
 then
     echo "Successfully built $BUILD_NUMBER"
     echo "Successfully tagged $TAG_API_ID:$TAG_API_VERSION"

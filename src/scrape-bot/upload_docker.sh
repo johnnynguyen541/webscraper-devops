@@ -16,9 +16,9 @@ export DOCKERPATH="$DOCKER_ID/$TAG_BOT_ID:v$TAG_BOT_VERSION"
 # Step 2:  
 # Authenticate & tag
 echo "Docker ID and Image: $DOCKERPATH"
-docker login --username $DOCKER_ID --password "$DOCKER_PASSWORD"
-docker tag $TAG_BOT_ID $DOCKERPATH
+docker login --username "$DOCKER_ID" --password "$DOCKER_PASSWORD"
+docker tag "$TAG_BOT_ID" "$DOCKERPATH"
 
 # Step 3:
 # Push image to a docker repository
-docker push $DOCKERPATH
+docker push "$DOCKERPATH"

@@ -172,7 +172,8 @@ jobs:
             sleep 15
             ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/
             ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/config
-            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/config-management
+            ssh remote-docker \ curl --fail \
+              127.0.0.1:"$API_PORT"/config-management
             ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/containers
             ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/health
       - slack-fail-notification

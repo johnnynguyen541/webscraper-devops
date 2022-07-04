@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 ## Variables
-API_IP="172.18.0.2"
-API_PORT=5001
-DOCKER_NETWORK="scrape-net"
-DOCKER_SUBNET="172.18.0.0/16"
-TAG_API_ID="scrape-api"
-TAG_API_VERSION="1.0.2"
+echo "API_IP = $API_IP"
+echo "API_PORT = $API_PORT"
+echo "DOCKER_NETWORK = $DOCKER_NETWORK"
+echo "DOCKER_SUBNET = $DOCKER_SUBNET"
+echo "TAG_API_ID = $TAG_API_ID"
+echo "TAG_API_VERSION = $TAG_API_VERSION"
 
 ## Input Variables
 BUILD_NUMBER=""

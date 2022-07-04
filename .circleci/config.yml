@@ -41,7 +41,7 @@ jobs:
   lint-ansible:
     description: |
       Lint Ansible Playbooks under Project Path: .ansible/
-    docker:1.0.2
+    docker:
       - image: cimg/base:current-22.04
     steps:
       - checkout

@@ -75,13 +75,7 @@ jobs:
     docker:
       - image: cimg/base:current-22.04
     steps:
-      - checkout
-      - run:
-          name: Install CircleCI Linter - YAML Check
-          command: sudo make install-lint-circleci
-      - run:
-          name: Run YAML Check
-          command: sudo make lint-circleci
+      - checkoutUpdate run_docker.sh, upload_docker.sh, and 2 more files...
       - slack-fail-notification
 
 
@@ -170,11 +164,11 @@ jobs:
           name: GET Unit Tests
           command: |
             sleep 15
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/config
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/config
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/config-management
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/containers
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/health
       - slack-fail-notification
 
 
@@ -199,8 +193,8 @@ jobs:
           name: GET Unit Tests
           command: |
             sleep 15
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+            ssh remote-docker \ curl --fail 127.0.0.1:"$BOT_PORT"/
+            ssh remote-docker \ curl --fail 127.0.0.1:"$BOT_PORT"/health
       - slack-fail-notification
 
 
@@ -240,7 +234,7 @@ jobs:
           name: Integration Test
           command: |
             sleep 15
-            ssh remote-docker \ curl --fail 127.0.0.1:5002/status
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/status
       - slack-fail-notification
 
 

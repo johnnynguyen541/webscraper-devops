@@ -151,7 +151,7 @@ jobs:
 
   test-unit-scrape-api:
     description: |
-      Unit Test Python Applications
+      Unit Test Python Scrape API Applications
     docker:
       - image: cimg/base:current-22.04
     steps:
@@ -159,33 +159,50 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
           version: 20.10.11
-      - ubuntu-install-pip3
       - run:
-          name: Install all Python Application Libraries
-          command: make install-app-scrape-api
-      - run:
-          name: Install all Python Unit Test Libraries
-          command: make install-test-unit
-      - run:
-          name: Run Python Application
+          name: Run Python Application - scrape-api
           command: |
             cd src/scrape-api/
             ./run_docker.sh
             cd ..
             cd ..
       - run:
-          name: Python Unit Tests
+          name: GET Unit Tests
           command: |
             sleep 15
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/config-management
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/containers
-            ssh remote-docker \ curl --fail 127.0.0.1:5001/health
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/config
+            ssh remote-docker \ curl --fail \
+              127.0.0.1:"$API_PORT"/config-management
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/containers
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/health
       - slack-fail-notification
 
 
   test-unit-scrape-bot:
-    <<: *job-in-progress
+    description: |
+      Unit Test Python Scrape Bot Applications
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 20.10.11
+      - run:
+          name: Run Python Application - scrape-bot
+          command: |
+            cd src/scrape-bot/
+            ./run_docker.sh
+            cd ..
+            cd ..
+      - run:
+          name: GET Unit Tests
+          command: |
+            sleep 15
+            ssh remote-docker \ curl --fail 127.0.0.1:"$BOT_PORT"/
+            ssh remote-docker \ curl --fail 127.0.0.1:"$BOT_PORT"/health
+      - slack-fail-notification
 
 
   scan-scrape-api:
@@ -197,7 +214,35 @@ jobs:
 
 
   test-integration:
-    <<: *job-in-progress
+    description: |
+      Test Integration
+    docker:
+      - image: cimg/base:current-22.04
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 20.10.11
+      - run:
+          name: Run Python Application - scrape-api
+          command: |
+            cd src/scrape-api/
+            ./run_docker.sh
+            cd ..
+            cd ..
+      - run:
+          name: Run Python Application - scrape-bot
+          command: |
+            cd src/scrape-bot/
+            ./run_docker.sh
+            cd ..
+            cd ..
+      - run:
+          name: Integration Test
+          command: |
+            sleep 15
+            ssh remote-docker \ curl --fail 127.0.0.1:"$API_PORT"/status
+      - slack-fail-notification
 
 
   commit-docker:

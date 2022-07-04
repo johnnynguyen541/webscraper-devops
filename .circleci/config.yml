@@ -214,7 +214,7 @@ jobs:
 
   test-integration:
     description: |
-      Test Integration 
+      Test Integration
     docker:
       - image: cimg/base:current-22.04
     steps:

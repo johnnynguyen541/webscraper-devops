@@ -96,7 +96,7 @@ TBD
 
 - [x] [Lint CI Pipeline](https://github.com/johnnynguyen541/webscraper-devops/issues/1)
 - [x] [Tech Debt - Clean up Circle CI, Makefile, and bash scripts for linting](https://github.com/johnnynguyen541/webscraper-devops/issues/4)
-- [ ] [Create Python Scrape Bot - Phase #1](https://github.com/johnnynguyen541/webscraper-devops/issues/5)
+- [x] [Create Python Scrape Bot - Phase #1](https://github.com/johnnynguyen541/webscraper-devops/issues/5)
 - [ ] [Create Python Scrape Bot - Phase #2](https://github.com/johnnynguyen541/webscraper-devops/issues/6)
 - [ ] [Update pipeline.png and pipeline.drawio](https://github.com/johnnynguyen541/webscraper-devops/issues/7)
 - [ ] [Create Scan/Security Tests](https://github.com/johnnynguyen541/webscraper-devops/issues/8)

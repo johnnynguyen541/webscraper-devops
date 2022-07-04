@@ -58,7 +58,8 @@ install-app-scrape-api:
 
 install-app-scrape-bot:
 	echo "Install Scrape Bot"
-	echo "TODO"
+	pip3 install --upgrade pip &&\
+		pip3 install -r src/scrape-bot/requirements.txt
 
 install-app-scrape-rds:
 	echo "Install Scrape RDS"

@@ -86,7 +86,8 @@ install-all:
 
 lint-ansible:
 	echo "Ansible Linter: ansible-lint"
-	ansible-lint
+	echo "TODO - Enable when working on Ansible"
+	#ansible-lint
 
 lint-bash:
 	echo "Lint Bash Scripts"

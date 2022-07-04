@@ -4,9 +4,9 @@
 # Assumes that an image is built via `run_docker.sh`
 
 ## Variables
-DOCKER_ID="johnnynguyen541"
-TAG_BOT_ID="scrape-bot"
-TAG_BOT_VERSION="1.0.2"
+echo "DOCKER_ID = $DOCKER_ID"
+echo "TAG_BOT_ID = $TAG_BOT_ID"
+echo "TAG_BOT_VERSION = $TAG_BOT_VERSION"
 
 # Step 1:
 # Create dockerpath

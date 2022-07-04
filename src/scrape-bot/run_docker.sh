@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 ## Variables
-BOT_IP="172.18.0.3"
-BOT_PORT=5002
-DOCKER_NETWORK="scrape-net"
-DOCKER_SUBNET="172.18.0.0/16"
-TAG_BOT_ID="scrape-bot"
-TAG_BOT_VERSION="1.0.2"
+echo "BOT_IP = $BOT_IP"
+echo "BOT_PORT = $BOT_PORT"
+echo "DOCKER_NETWORK = $DOCKER_NETWORK"
+echo "DOCKER_SUBNET = $DOCKER_SUBNET"
+echo "TAG_BOT_ID = $TAG_BOT_ID"
+echo "TAG_BOT_VERSION = $TAG_BOT_VERSION"
 
 ## Input Variables
 BUILD_NUMBER=""

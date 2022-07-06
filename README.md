@@ -78,7 +78,7 @@ Python App Files   | Description
 `Dockerfile`       | Docker Build File
 `requirements.txt` | Python Library requirements file
 `run_docker.sh`    | Run Docker Container
-`upload_docker.sh` | Upload Docker Container to Docker Registrt
+`upload_docker.sh` | Upload Docker Container to Docker Registry
 
 ## Pipeline
 
@@ -111,3 +111,13 @@ TBD
 - [ ] [Create RDS cluster](https://github.com/johnnynguyen541/webscraper-devops/issues/17)
 - [ ] [Ansible Tower setup with Bastion](https://github.com/johnnynguyen541/webscraper-devops/issues/18)
 - [ ] [Scope out New Tech](https://github.com/johnnynguyen541/webscraper-devops/issues/19)
+
+## S3 Bucket Infra
+
+webscraper-infrastructure/
+
+File/Directory   | Description
+---------------- | ------------------
+`artifacts/`     | Artifacts Needed for Instances
+`bootstrap/`     | Bootstrap Scripts during cloudinit
+`tfstate/`       | Terraform State Files

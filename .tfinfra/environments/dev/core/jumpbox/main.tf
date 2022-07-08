@@ -6,10 +6,15 @@ module "ec2_jumpbox" {
   ami                    = var.ubuntu_2204_arm_ami[var.region]
   instance_type          = var.instance_type
   key_name               = var.aws_key_name
+  subnet_id              = data.terraform_remote_state.networking.outputs.public_subnets_ids[0]
   vpc_security_group_ids = [
     data.terraform_remote_state.security.outputs.sandbox_sg_id,
     data.terraform_remote_state.security.outputs.ssh_sg_id
   ]
+
+  # OPTIONAL VARIABLES
+  iam_instance_profile   = data.terraform_remote_state.iam.outputs.core_iam_profile_name
+  userdata               = data.template_cloudinit_config.bootstrap_jumpbox.rendered
 
   # TAGS
   tags = {

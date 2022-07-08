@@ -5,6 +5,7 @@ resource "aws_instance" "ec2_singular" {
   ami                                  = var.ami
   instance_type                        = var.instance_type
   key_name                             = var.key_name
+  subnet_id                            = var.subnet_id
   vpc_security_group_ids               = var.vpc_security_group_ids
 
   # OPTIONAL VARIABLES
@@ -39,7 +40,6 @@ resource "aws_instance" "ec2_singular" {
   root_block_device                    = var.root_block_device
   secondary_private_ips                = var.secondary_private_ips
   source_dest_check                    = var.source_dest_check
-  subnet_id                            = var.subnet_id
   timeouts                             = var.timeouts
   tenancy                              = var.tenancy
   user_data                            = var.user_data

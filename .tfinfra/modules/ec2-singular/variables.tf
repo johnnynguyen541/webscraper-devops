@@ -27,6 +27,12 @@ variable "key_name" {
   default     = null
 }
 
+variable "subnet_id" {
+  description = "The VPC Subnet ID to launch in"
+  type        = string
+  default     = null
+}
+
 variable "vpc_security_group_ids" {
   description = "A list of security group IDs to associate with"
   type        = list(string)
@@ -221,12 +227,6 @@ variable "source_dest_check" {
   description = "Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs."
   type        = bool
   default     = true
-}
-
-variable "subnet_id" {
-  description = "The VPC Subnet ID to launch in"
-  type        = string
-  default     = null
 }
 
 variable "timeouts" {

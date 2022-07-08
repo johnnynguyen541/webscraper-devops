@@ -83,5 +83,7 @@ role_tags = {
   iam_instance_tag        = "iam_profile",
   iam_role_tag            = "iam_role",
   iam_role_policy_tag     = "iam_policy",
-  iam_user_tag            = "iam_user"
+  iam_user_tag            = "iam_user",
+
+  ec2_instance_tag        = "ec2"
 }

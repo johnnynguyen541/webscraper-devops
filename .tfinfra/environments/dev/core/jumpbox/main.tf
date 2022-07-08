@@ -1,45 +1,24 @@
 # MODULES USED IN FEATURE
-
-/*
-# SERVICE MODULE
-module "NAME_OF_SERVICE" {
-  source          = "../../../../services/SERVICE_TYPE/MODULE_NAME"
+module "ec2_jumpbox" {
+  source          = "../../../../modules/ec2-singular"
 
   # REQUIRED VARIABLES
-  module_variable = var.local_variable_declared
-
-  # OPTIONAL VARIABLES
-  module_variable = var.local_variable_declared
-
-  # OTHER VARIABLES
-  module_variable = var.local_variable_declared
-
-  # TAGS
-  account_tag     = var.account_tag
-  env_tag         = var.env_tag
-  project_tag     = var.project_tag
-  role_tag        = var.ROLE_TAG_VAR
-  subenv_tag      = var.subenv_tag
-}
-
-# MODULE
-module "NAME_OF_MODULE" {
-  source          = "../../../../modules/MODULE_NAME"
-
-  # REQUIRED VARIABLES
-  module_variable = var.local_variable_declared
-
-  # OPTIONAL VARIABLES
-  module_variable = var.local_variable_declared
-
-  # OTHER VARIABLES
-  module_variable = var.local_variable_declared
+  ami                    = var.ubuntu_2204_arm_ami[var.region]
+  instance_type          = var.instance_type
+  key_name               = var.aws_key_name
+  vpc_security_group_ids = [
+    data.terraform_remote_state.security.outputs.sandbox_sg_id,
+    data.terraform_remote_state.security.outputs.ssh_sg_id
+  ]
 
   # TAGS
-  account_tag     = var.account_tag
-  env_tag         = var.env_tag
-  project_tag     = var.project_tag
-  role_tag        = var.ROLE_TAG_VAR
-  subenv_tag      = var.subenv_tag
+  tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.jumpbox]}-${var.role_tags[local.ec2_instance_tag]}"
+    Account     = var.account_tag
+    Commit      = var.commit_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = var.role_tags[local.ec2_instance_tag]
+    Role        = var.role_tags[local.jumpbox]
+  }
 }
-*/

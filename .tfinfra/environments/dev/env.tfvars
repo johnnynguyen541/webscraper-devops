@@ -74,18 +74,14 @@ role_tags = {
   # CORE
   infra       = "infra",      # Core Networking Infrastructure
   bastion     = "bastion",    # Core Security Groups
+  jumpbox     = "jumpbox",
   ssh         = "ssh",
   sandbox     = "sandbox",
   core_server = "core_server", # Core IAM Group
   prometheus  = "prometheus",  # Prometheus User
 
-  iam_instance_tag        = "iam_profile"
-  iam_role_tag            = "iam_role"
-  iam_role_policy_tag     = "iam_policy"
+  iam_instance_tag        = "iam_profile",
+  iam_role_tag            = "iam_role",
+  iam_role_policy_tag     = "iam_policy",
   iam_user_tag            = "iam_user"
-
-  # MAIN
-  s_master    = "s_master",
-  s_slave_1   = "s_slave_1",
-  s_slave_2   = "s_slave_2"
 }

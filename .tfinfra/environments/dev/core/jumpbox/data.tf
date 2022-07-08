@@ -44,7 +44,7 @@ data "template_file" "cloudinit_bootstrap_jumpbox" {
   vars = {
     env_tag    = "${var.env_tag}-${var.subenv_tag}"
     region     = var.region
-    role_tag   = var.role_tags["s_master"]
+    role_tag   = var.role_tags["jumpbox"]
     s3_bucket  = var.s3_bucket_name
   }
 }

@@ -3,7 +3,7 @@ module "ec2_jumpbox" {
   source          = "../../../../modules/ec2-singular"
 
   # REQUIRED VARIABLES
-  ami                    = var.ubuntu_2204_arm_ami[var.region]
+  ami                    = var.ubuntu_2204_x86_ami[var.region]
   instance_type          = var.instance_type
   key_name               = var.aws_key_name
   subnet_id              = data.terraform_remote_state.networking.outputs.public_subnets_ids[0]
@@ -13,8 +13,9 @@ module "ec2_jumpbox" {
   ]
 
   # OPTIONAL VARIABLES
-  iam_instance_profile   = data.terraform_remote_state.iam.outputs.core_iam_profile_name
-  user_data               = data.template_cloudinit_config.bootstrap_jumpbox.rendered
+  associate_public_ip_address = var.associate_public_ip_address
+  iam_instance_profile        = data.terraform_remote_state.iam.outputs.core_iam_profile_name
+  user_data                   = data.template_cloudinit_config.bootstrap_jumpbox.rendered
 
   # TAGS
   tags = {

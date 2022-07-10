@@ -2,7 +2,7 @@
 data "terraform_remote_state" "networking" {
   backend = "s3"
   config = {
-    bucket  = "johnny.aws-infrastructure"
+    bucket  = "webscraper-infrastructure"
     key     = "tfstate/dev/core/networking.tfstate"
     region  = var.region
     encrypt = false
@@ -12,7 +12,7 @@ data "terraform_remote_state" "networking" {
 data "terraform_remote_state" "security" {
   backend = "s3"
   config = {
-    bucket  = "johnny.aws-infrastructure"
+    bucket  = "webscraper-infrastructure"
     key     = "tfstate/dev/core/security.tfstate"
     region  = var.region
     encrypt = false
@@ -22,7 +22,7 @@ data "terraform_remote_state" "security" {
 data "terraform_remote_state" "iam" {
   backend = "s3"
   config = {
-    bucket  = "johnny.aws-infrastructure"
+    bucket  = "webscraper-infrastructure"
     key     = "tfstate/dev/core/iam.tfstate"
     region  = var.region
     encrypt = false

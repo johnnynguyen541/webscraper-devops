@@ -3,7 +3,7 @@
 locals {
   # ROLE TAGS
   jumpbox          = "jumpbox"
-  ec2_instance_tag = "ec2"
+  ec2_instance_tag = "ec2_instance_tag"
 }
 
 # ENV
@@ -18,7 +18,7 @@ variable "s3_bucket_name" {
   default     = null
 }
 
-variable "ubuntu_2204_arm_ami" {
+variable "ubuntu_2204_x86_ami" {
   description = "ID of AMI Ubuntu 22.04 to use for the instance"
   type        = map(string)
   default     = null
@@ -29,6 +29,12 @@ variable "ubuntu_2204_arm_ami" {
 # SUBENV
 
 # FEATURE
+variable "associate_public_ip_address" {
+  description = "Whether to associate a public IP address with an instance in a VPC"
+  type        = bool
+  default     = null
+}
+
 variable "aws_key_name" {
   description = "Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource"
   type        = string

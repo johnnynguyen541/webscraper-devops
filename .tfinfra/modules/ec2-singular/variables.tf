@@ -163,12 +163,6 @@ variable "launch_template" {
   default     = null
 }
 
-variable "maintenance_options" {
-  description = "The maintenance and recovery options for the instance"
-  type        = any
-  default     = {}
-}
-
 variable "metadata_options" {
   description = "Customize the metadata options of the instance"
   type        = map(string)
@@ -196,12 +190,6 @@ variable "placement_group" {
 variable "placement_partition_number" {
   description = "The number of the partition the instance is in."
   type        = string
-  default     = null
-}
-
-variable "private_dns_name_options" {
-  description = "The options for the instance hostname"
-  type        = any
   default     = null
 }
 

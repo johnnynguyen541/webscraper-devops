@@ -1,21 +1,27 @@
 #!/bin/bash
 
+# Variables
+PRINT_LIB_PATH="$(dirname "$(readlink -f "$0")")/cfg/print-library.sh"
+
+# shellcheck source=/dev/null
+. "${PRINT_LIB_PATH}"
+
 # Run Terraform Plan Command
 check_terraform_version() {
     echo ""
-    echo "Check Terraform Version:"
+    cyan_print "Check Terraform Version:"
     echo ""
     
     if ! terraform -version;
     then
-        echo "Please install Terraform before running script.  Exiting:"
+        red_print "Please install Terraform before running script.  Exiting:"
         exit 1
     fi
 }
 
 check_terraform_files() {
     echo ""
-    echo "Check Terraform files in directory:"
+    cyan_print "Check Terraform files in directory:"
     echo ""
     
     tfList=$(find . -maxdepth 1 -name '*.tf')
@@ -25,24 +31,24 @@ check_terraform_files() {
 
     if [[ $tfList ]];
     then
-        echo "Found .tf files in current directory.  Continuing:"
+        green_print "Found .tf files in current directory.  Continuing:"
     else
-        echo "Did not find .tf files in current directory.  Exiting:"
+        red_print "Did not find .tf files in current directory.  Exiting:"
         exit 1
     fi
 
     echo "Terraform Variable Files: $tfVarList"
     if [[ $tfVarList ]];
     then
-        echo "Found .tfvars files in current directory."
+        green_print "Found .tfvars files in current directory."
     else
-        echo "Did not find .tfvars files in current directory."
+        red_print "Did not find .tfvars files in current directory."
     fi
 }
 
 check_terraform_var_files() {
     echo ""
-    echo "Check Terraform var files in directory:"
+    cyan_print "Check Terraform var files in directory:"
     echo ""
 
     secretVars="../../secret.tfvars"
@@ -56,22 +62,26 @@ check_terraform_var_files() {
     echo "featureVars = $featureVars"
 
     if [ ! -f $secretVars ]; then
-        echo "Secret Vars does not exist."
+        red_print "Secret Vars does not exist."
         exit 1
     elif [ ! -f $envVars ]; then
-        echo "Env Vars does not exist."
+        red_print "Env Vars does not exist."
         exit 1
     elif [ ! -f $subenvVars ]; then
-        echo "Sub Env Vars does not exist."
+        red_print "Sub Env Vars does not exist."
         exit 1
     elif [ ! -f $featureVars ]; then
-        echo "Feature Vars does not exist."
+        red_print "Feature Vars does not exist."
         exit 1
     fi
 }
 
 
 terraform_plan_cmd() {
+    echo ""
+    cyan_print "Run Terraform Plan Command:"
+    echo ""
+
     echo "terraform plan -var-file=\"../../secret.tfvars\" \\"
     echo "  -var-file=\"../../env.tfvars\" \\"
     echo "  -var-file=\"../subenv.tfvars\" \\"
@@ -89,9 +99,9 @@ terraform_plan_cmd() {
 
 # Define Main Function
 terraform_plan() {
-    echo "-----------------------"
-    echo "Running Terraform Plan:"
-    echo "-----------------------"
+    cyan_print "-----------------------"
+    cyan_print "Running Terraform Plan:"
+    cyan_print "-----------------------"
 
     check_terraform_version
     check_terraform_files

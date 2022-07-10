@@ -14,7 +14,7 @@ module "ec2_jumpbox" {
 
   # OPTIONAL VARIABLES
   iam_instance_profile   = data.terraform_remote_state.iam.outputs.core_iam_profile_name
-  userdata               = data.template_cloudinit_config.bootstrap_jumpbox.rendered
+  user_data               = data.template_cloudinit_config.bootstrap_jumpbox.rendered
 
   # TAGS
   tags = {

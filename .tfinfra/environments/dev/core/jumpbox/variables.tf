@@ -21,7 +21,7 @@ variable "s3_bucket_name" {
 variable "ubuntu_2204_arm_ami" {
   description = "ID of AMI Ubuntu 22.04 to use for the instance"
   type        = map(string)
-  default     = ""
+  default     = null
 }
 
 # SECRETS

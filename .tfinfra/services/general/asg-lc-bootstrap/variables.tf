@@ -17,10 +17,6 @@ locals {
   ec2_tag = "ec2"
 }
 
-locals {
-
-}
-
 ######################
 # REQUIRED VARIABLES #
 ######################
@@ -140,6 +136,11 @@ variable "asg_name" {
 ########
 variable "account_tag" {
   description = "Tag - Account Name"
+  type        = string  # string, number, bool, list, map
+}
+
+variable "commit_tag" {
+  description = "Tag - GIT Commit ID Name"
   type        = string  # string, number, bool, list, map
 }
 

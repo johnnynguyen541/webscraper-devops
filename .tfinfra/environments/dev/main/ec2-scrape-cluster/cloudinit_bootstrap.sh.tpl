@@ -28,6 +28,11 @@ main () {
     echo "Failed installing awscli.  Return 1"
     return 1
   fi
+
+  # Install Nginx
+  echo "Install Nginx"
+
+  apt -y install nginx
 }
 
 main >> $${BOOTSTRAP_LOG}

@@ -5,33 +5,33 @@
 ###################
 locals {
   alb_tags = {
-    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.alb_tag}"
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_alb_tag}-${local.alb_tag}"
     Account     = var.account_tag
     Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.alb_tag
-    Role        = var.role_tag
+    Role        = var.role_alb_tag
   }
 
   alb_tg_tags = {
-    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.alb_tg_tag}"
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_alb_tg_tag}-${local.alb_tg_tag}"
     Account     = var.account_tag
     Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.alb_tg_tag
-    Role        = var.role_tag
+    Role        = var.role_alb_tg_tag
   }
 
   instance_tags = {
-    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.ec2_tag}"
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_ec2_tag}-${local.ec2_tag}"
     Account     = var.account_tag
     Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.ec2_tag
-    Role        = var.role_tag
+    Role        = var.role_ec2_tag
   }
 
   # RESOURCE TAGS
@@ -140,6 +140,12 @@ variable "userdata" {
 }
 
 # ASG
+variable "asg_name" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string  # string, number, bool, list, map
+  default     = ""
+}
+
 variable "asg_desired_capacity" {
   description = "The Desired size of the ASG"
   type        = number  # string, number, bool, list, map
@@ -156,13 +162,6 @@ variable "asg_vpc_subnet_ids" {
   description = "A list of subnet IDs to launch resources in"
   type        = list(string)  # string, number, bool, list, map
   default     = null
-}
-
-# ALL RESOURCES
-variable "asg_name" {
-  description = "Creates a unique name beginning with the specified prefix"
-  type        = string  # string, number, bool, list, map
-  default     = ""
 }
 
 # ALB

@@ -12,8 +12,8 @@ module "scrape_ec2" {
   vpc_id                      = data.terraform_remote_state.networking.outputs.vpc_id
 
   # OPTIONAL VARIABLES
-  alb_name                    = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags["scrape_alb"]}"
-  alb_tg_name                 = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags["scrape_tg"]}"
+  alb_name                    = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-scrape-alb"
+  alb_tg_name                 = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-scrape-tg"
   alb_security_groups         = [
     data.terraform_remote_state.security.outputs.scrape_alb_sg_id
   ]

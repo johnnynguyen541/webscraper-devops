@@ -72,14 +72,7 @@ resource "aws_lb" "alb" {
   subnets            = var.alb_vpc_subnet_ids
 
   # TAGS
-  dynamic "tag" {
-    for_each = local.alb_tags
-    content {
-      key                 = tag.key
-      value               = tag.value
-      propagate_at_launch = true
-    }
-  }
+  tags = local.alb_tags
 }
 
 resource "aws_lb_target_group" "alb_tg" {
@@ -101,14 +94,7 @@ resource "aws_lb_target_group" "alb_tg" {
   }
 
   # TAGS
-  dynamic "tag" {
-    for_each = local.alb_tg_tags
-    content {
-      key                 = tag.key
-      value               = tag.value
-      propagate_at_launch = true
-    }
-  }
+  tags = local.alb_tg_tags
 }
 
 resource "aws_lb_listener" "alb_listener" {

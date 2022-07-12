@@ -90,4 +90,5 @@ role_tags = {
   # MAIN
   scrape_alb = "scrape_alb"
   scrape_ec2 = "scrape_ec2"
+  scrape_tg  = "scrape_tg"
 }

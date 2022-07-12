@@ -4,6 +4,26 @@
 # LOCAL VARIABLES #
 ###################
 locals {
+  alb_tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.alb_tag}"
+    Account     = var.account_tag
+    Commit      = var.commit_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = local.alb_tag
+    Role        = var.role_tag
+  }
+
+  alb_tg_tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.alb_tg_tag}"
+    Account     = var.account_tag
+    Commit      = var.commit_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = local.alb_tg_tag
+    Role        = var.role_tag
+  }
+
   instance_tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.ec2_tag}"
     Account     = var.account_tag
@@ -15,7 +35,9 @@ locals {
   }
 
   # RESOURCE TAGS
-  ec2_tag = "ec2"
+  alb_tag    = "alb"
+  alb_tg_tag = "tg"
+  ec2_tag    = "ec2"
 }
 
 ######################
@@ -43,10 +65,20 @@ variable "asg_min_capacity" {
   type        = number  # string, number, bool, list, map
 }
 
-variable "security_groups" {
+variable "asg_security_groups" {
   description = "A list of associated security group IDS"
   type        = list(string)  # string, number, bool, list, map
-  default     = null
+}
+
+# ALB
+variable "alb_security_groups" {
+  description = "A list of associated security group IDS"
+  type        = list(string)  # string, number, bool, list, map
+}
+
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string  # string, number, bool, list, map
 }
 
 ######################
@@ -120,7 +152,7 @@ variable "force_delete" {
   default     = true
 }
 
-variable "vpc_subnet_ids" {
+variable "asg_vpc_subnet_ids" {
   description = "A list of subnet IDs to launch resources in"
   type        = list(string)  # string, number, bool, list, map
   default     = null
@@ -131,6 +163,73 @@ variable "asg_name" {
   description = "Creates a unique name beginning with the specified prefix"
   type        = string  # string, number, bool, list, map
   default     = ""
+}
+
+# ALB
+variable "alb_health_healthy_threshold" {
+  description = "Health Check: Healthy Threshold"
+  type        = number  # string, number, bool, list, map
+  default     = 3
+}
+
+variable "alb_health_interval" {
+  description = "Health Check: Interval"
+  type        = number  # string, number, bool, list, map
+  default     = 10
+}
+
+variable "alb_health_path" {
+  description = "Health Check: Path"
+  type        = string  # string, number, bool, list, map
+  default     = "/"
+}
+
+variable "alb_health_port" {
+  description = "Health Check: Port"
+  type        = number  # string, number, bool, list, map
+  default     = 80
+}
+
+variable "alb_health_timeout" {
+  description = "Health Check: Timeout"
+  type        = number  # string, number, bool, list, map
+  default     = 5
+}
+
+variable "alb_health_unhealthy_threshold" {
+  description = "Health Check: Unhealthy Threshold"
+  type        = number  # string, number, bool, list, map
+  default     = 10
+}
+
+variable "alb_idle_timeout" {
+  description = "The time in seconds that the connection is allowed to be idle. Only valid for ALB"
+  type        = number  # string, number, bool, list, map
+  default     = 60
+}
+
+variable "alb_internal" {
+  description = "If true, the LB will be internal"
+  type        = bool  # string, number, bool, list, map
+  default     = false
+}
+
+variable "alb_name" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string  # string, number, bool, list, map
+  default     = ""
+}
+
+variable "alb_tg_name" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string  # string, number, bool, list, map
+  default     = ""
+}
+
+variable "alb_vpc_subnet_ids" {
+  description = "A list of subnet IDs for ALB to reside in"
+  type        = list(string)  # string, number, bool, list, map
+  default     = null
 }
 
 ###################
@@ -161,8 +260,18 @@ variable "project_tag" {
   type        = string  # string, number, bool, list, map
 }
 
-variable "role_tag" {
-  description = "Tag - Resource Roles"
+variable "role_alb_tag" {
+  description = "Tag - Resource Roles for ALB"
+  type        = string  # string, number, bool, list, map
+}
+
+variable "role_alb_tg_tag" {
+  description = "Tag - Resource Roles for ALB tg"
+  type        = string  # string, number, bool, list, map
+}
+
+variable "role_ec2_tag" {
+  description = "Tag - Resource Roles for EC2"
   type        = string  # string, number, bool, list, map
 }
 

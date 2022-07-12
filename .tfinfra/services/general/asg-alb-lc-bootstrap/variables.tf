@@ -70,6 +70,12 @@ variable "create_resource_before_destroy" {
   default     = true
 }
 
+variable "domain_name" {
+  type        = string
+  description = "The domain name to use"
+  default     = null
+}
+
 variable "delete_on_termination" {
   description = "Whether the volume should be destroyed on instance termination"
   type        = bool  # string, number, bool, list, map

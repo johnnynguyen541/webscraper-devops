@@ -16,7 +16,10 @@ module "scrape_ec2" {
   associate_public_ip_address = var.associate_public_ip_address
   aws_key_name                = var.aws_key_name
   iam_instance_profile        = data.terraform_remote_state.iam.outputs.core_iam_profile_name
-  security_groups             = [data.terraform_remote_state.security.outputs.sandbox_sg_id]
+  security_groups             = [
+    data.terraform_remote_state.security.outputs.ssh_sg_id,
+    data.terraform_remote_state.security.outputs.scrape_alb_sg_id
+  ]
   userdata                    = data.template_cloudinit_config.bootstrap_scrape.rendered
   vpc_subnet_ids              = data.terraform_remote_state.networking.outputs.public_subnets_ids
 

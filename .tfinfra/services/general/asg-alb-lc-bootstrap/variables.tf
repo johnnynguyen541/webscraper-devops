@@ -7,6 +7,7 @@ locals {
   instance_tags = {
     Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tag}-${local.ec2_tag}"
     Account     = var.account_tag
+    Commit      = var.commit_tag
     Environment = "${var.env_tag}-${var.subenv_tag}"
     Project     = var.project_tag
     Resource    = local.ec2_tag

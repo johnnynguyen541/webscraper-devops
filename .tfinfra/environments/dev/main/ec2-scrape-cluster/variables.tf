@@ -51,6 +51,12 @@ variable "domain_name" {
   default     = null
 }
 
+variable "force_delete" {
+  description = "Allows deleting the Auto Scaling Group without waiting for all instances in the pool to terminate"
+  type        = bool  # string, number, bool, list, map
+  default     = true
+}
+
 variable "instance_type" {
   description = "AMI instance type.  Default to Free Tier"
   type        = string  # string, number, bool, list, map

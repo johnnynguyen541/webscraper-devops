@@ -15,13 +15,14 @@ module "scrape_ec2" {
   asg_name                    = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags["scrape_ec2"]}"
   associate_public_ip_address = var.associate_public_ip_address
   aws_key_name                = var.aws_key_name
+  force_delete                = var.force_delete
   iam_instance_profile        = data.terraform_remote_state.iam.outputs.core_iam_profile_name
   security_groups             = [
     data.terraform_remote_state.security.outputs.ssh_sg_id,
     data.terraform_remote_state.security.outputs.scrape_alb_sg_id
   ]
   userdata                    = data.template_cloudinit_config.bootstrap_scrape.rendered
-  vpc_subnet_ids              = data.terraform_remote_state.networking.outputs.public_subnets_ids
+  vpc_subnet_ids              = data.terraform_remote_state.networking.outputs.private_subnets_ids
 
   # TAGS
   account_tag     = var.account_tag

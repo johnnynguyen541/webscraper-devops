@@ -129,3 +129,95 @@ resource "aws_security_group" "ssh_server" {
     Role        = var.role_tags[local.ssh_tag]
   }
 }
+
+# ALB LISTENER
+resource "aws_security_group" "scrape_alb" {
+  # REQUIRED VARIABLES
+  description        = "HTTP Ingress for Scrape API ALB"
+  vpc_id             = var.vpc_id
+
+  ingress {
+    protocol         = "tcp"
+    from_port        = 80
+    to_port          = 80
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    protocol         = "tcp"
+    from_port        = 80
+    to_port          = 80
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    protocol         = -1
+    from_port        = 0
+    to_port          = 0
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    protocol         = -1
+    from_port        = 0
+    to_port          = 0
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  # TAGS
+  tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.scrape_alb]}-${local.sg_resource_tag}"
+    Account     = var.account_tag
+    Commit      = var.commit_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = local.sg_resource_tag
+    Role        = var.role_tags[local.scrape_alb]
+  }
+}
+
+# ALB LISTENER
+resource "aws_security_group" "scrape_server" {
+  # REQUIRED VARIABLES
+  description        = "HTTP Ingress for Scrape API ALB"
+  vpc_id             = var.vpc_id
+
+  ingress {
+    protocol         = "tcp"
+    from_port        = 80
+    to_port          = 80
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    protocol         = "tcp"
+    from_port        = 80
+    to_port          = 80
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    protocol         = -1
+    from_port        = 0
+    to_port          = 0
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    protocol         = -1
+    from_port        = 0
+    to_port          = 0
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  # TAGS
+  tags = {
+    Name        = "${var.env_tag}-${var.subenv_tag}-${var.project_tag}-${var.role_tags[local.scrape_ec2]}-${local.sg_resource_tag}"
+    Account     = var.account_tag
+    Commit      = var.commit_tag
+    Environment = "${var.env_tag}-${var.subenv_tag}"
+    Project     = var.project_tag
+    Resource    = local.sg_resource_tag
+    Role        = var.role_tags[local.scrape_ec2]
+  }
+}

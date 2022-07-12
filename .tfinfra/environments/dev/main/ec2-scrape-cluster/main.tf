@@ -2,7 +2,7 @@
 
 # SERVICE MODULE
 module "scrape_ec2" {
-  source                      = "../../../../services/general/asg-lc-bootstrap"
+  source                      = "../../../../services/general/asg-alb-lc-bootstrap"
 
   # REQUIRED VARIABLES
   ami                         = var.ubuntu_2204_x86_ami[var.region]

@@ -45,6 +45,12 @@ variable "aws_key_name" {
   default     = null
 }
 
+variable "domain_name" {
+  type        = string
+  description = "The domain name to use"
+  default     = null
+}
+
 variable "instance_type" {
   description = "AMI instance type.  Default to Free Tier"
   type        = string  # string, number, bool, list, map

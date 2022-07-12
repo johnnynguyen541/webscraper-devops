@@ -10,6 +10,8 @@ locals {
   ssh_tag         = "ssh"
   # RESOURCE TAGS
   sg_resource_tag = "sg"
+  scrape_alb      = "scrape_alb"
+  scrape_ec2      = "scrape_ec2"
 }
 
 ######################

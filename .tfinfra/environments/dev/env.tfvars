@@ -86,7 +86,8 @@ role_tags = {
   iam_user_tag            = "iam_user",
 
   ec2_instance_tag        = "ec2"
-
+  
   # MAIN
+  scrape_alb = "scrape_alb"
   scrape_ec2 = "scrape_ec2"
 }

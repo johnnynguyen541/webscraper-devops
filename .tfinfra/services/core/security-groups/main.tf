@@ -179,7 +179,7 @@ resource "aws_security_group" "scrape_alb" {
 # ALB LISTENER
 resource "aws_security_group" "scrape_server" {
   # REQUIRED VARIABLES
-  description        = "HTTP Ingress for Scrape API ALB"
+  description        = "HTTP Ingress for Scrape API EC2 Server"
   vpc_id             = var.vpc_id
 
   ingress {

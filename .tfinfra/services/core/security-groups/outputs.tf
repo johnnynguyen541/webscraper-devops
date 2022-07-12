@@ -13,3 +13,13 @@ output "ssh_sg_id" {
   description = "SSH Security Group ID"
   value       = aws_security_group.ssh_server.id
 }
+
+output "scrape_alb_sg_id" {
+  description = "Scrape ALB Security Group ID"
+  value       = aws_security_group.scrape_alb.id
+}
+
+output "scrape_server_sg_id" {
+  description = "Scrape EC2 Security Group ID"
+  value       = aws_security_group.scrape_server.id
+}

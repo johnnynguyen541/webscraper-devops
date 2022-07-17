@@ -112,6 +112,7 @@ resource "aws_cloudfront_distribution" "cf_dist" {
   }
 
   # REQUIRED
+  # TODO - REVIEW : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution#viewer-certificate-arguments
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate.cert.arn
     ssl_support_method       = "sni-only"

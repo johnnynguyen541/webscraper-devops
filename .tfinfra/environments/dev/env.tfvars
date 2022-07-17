@@ -69,6 +69,9 @@ private_subnets     = [
   "10.0.11.0/24"
 ]
 
+# DNS
+cloudfront_domain_name = "dev.scrape-cluster.johnny-aws.com"
+
 # Role Tags
 role_tags = {
   # CORE

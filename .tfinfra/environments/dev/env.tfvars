@@ -69,23 +69,29 @@ private_subnets     = [
   "10.0.11.0/24"
 ]
 
+# DNS
+cloudfront_domain_name = "dev.scrape-cluster.johnny-aws.com"
+
 # Role Tags
 role_tags = {
   # CORE
   infra       = "infra",      # Core Networking Infrastructure
   bastion     = "bastion",    # Core Security Groups
+  jumpbox     = "jumpbox",
   ssh         = "ssh",
   sandbox     = "sandbox",
   core_server = "core_server", # Core IAM Group
   prometheus  = "prometheus",  # Prometheus User
 
-  iam_instance_tag        = "iam_profile"
-  iam_role_tag            = "iam_role"
-  iam_role_policy_tag     = "iam_policy"
-  iam_user_tag            = "iam_user"
+  iam_instance_tag        = "iam_profile",
+  iam_role_tag            = "iam_role",
+  iam_role_policy_tag     = "iam_policy",
+  iam_user_tag            = "iam_user",
 
+  ec2_instance_tag        = "ec2"
+  
   # MAIN
-  s_master    = "s_master",
-  s_slave_1   = "s_slave_1",
-  s_slave_2   = "s_slave_2"
+  scrape_alb = "scrape_alb"
+  scrape_ec2 = "scrape_ec2"
+  scrape_tg  = "scrape_tg"
 }

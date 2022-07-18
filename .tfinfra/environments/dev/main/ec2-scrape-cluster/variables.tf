@@ -1,9 +1,10 @@
 # VARIABLES DECLARED
 
 # ENV
-variable "ami_2004" {
-  description = "AMI ID of Ubuntu 20.04 Instance"
-  type        = string
+variable "ubuntu_2204_x86_ami" {
+  description = "ID of AMI Ubuntu 22.04 to use for the instance"
+  type        = map(string)
+  default     = null
 }
 
 variable "region" {
@@ -16,13 +17,47 @@ variable "region" {
 # SUBENV
 
 # FEATURE
+variable "asg_desired_capacity" {
+  description = "The Desired size of the ASG"
+  type        = number  # string, number, bool, list, map
+  default     = 1
+}
+
+variable "asg_max_capacity" {
+  description = "The Maximum size of the ASG"
+  type        = number  # string, number, bool, list, map
+}
+
+variable "asg_min_capacity" {
+  description = "The Minimum size of the ASG"
+  type        = number  # string, number, bool, list, map
+}
+
+variable "associate_public_ip_address" {
+  description = "Associate a public ip address with an instance in a VPC"
+  type        = bool  # string, number, bool, list, map
+  default     = false
+}
+
 variable "aws_key_name" {
   description = "AWS Key used for Instances"
   type        = string  # string, number, bool, list, map
   default     = null
 }
 
-variable "ami_instance_type" {
+variable "domain_name" {
+  type        = string
+  description = "The domain name to use"
+  default     = null
+}
+
+variable "force_delete" {
+  description = "Allows deleting the Auto Scaling Group without waiting for all instances in the pool to terminate"
+  type        = bool  # string, number, bool, list, map
+  default     = true
+}
+
+variable "instance_type" {
   description = "AMI instance type.  Default to Free Tier"
   type        = string  # string, number, bool, list, map
   default     = "t2.micro"
@@ -43,6 +78,11 @@ variable "userdata" {
 # TAGS
 variable "account_tag" {
   description = "Tag - Account Name"
+  type        = string  # string, number, bool, list, map
+}
+
+variable "commit_tag" {
+  description = "Tag - GIT Commit ID Name"
   type        = string  # string, number, bool, list, map
 }
 

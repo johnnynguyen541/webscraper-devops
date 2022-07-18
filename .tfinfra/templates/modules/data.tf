@@ -4,7 +4,7 @@
 data "terraform_remote_state" "FEATURE" {
   backend = "s3"
   config = {
-    bucket  = "johnny.aws-infrastructure"
+    bucket  = "webscraper-infrastructure"
     key     = "tfstate/ENV/SUBENV/FEATURE.tfstate"
     region  = "us-west-2"
     encrypt = false

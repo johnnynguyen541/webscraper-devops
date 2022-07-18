@@ -4,7 +4,7 @@ data "terraform_remote_state" "networking" {
   config = {
     bucket  = "webscraper-infrastructure"
     key     = "tfstate/dev/core/networking.tfstate"
-    region  = "us-west-2"
+    region  = var.region
     encrypt = false
   }
 }
